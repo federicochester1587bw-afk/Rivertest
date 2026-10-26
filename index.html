@@ -9,11 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* ============================================================
-           CSS CUSTOM PROPERTIES & RESET
-           ============================================================ */
         :root {
-            /* Dark Theme (Hero, Architecture, Footer) */
             --bg-deep: #060d18;
             --bg-dark: #0e1e33;
             --bg-card-dark: #112240;
@@ -21,16 +17,12 @@
             --text-primary: #e8f0fa;
             --text-secondary: #94a3b8;
             --text-muted: #5e728a;
-
-            /* Light Theme (Content Sections) */
             --bg-light: #f8fafc;
             --bg-white: #ffffff;
             --bg-card-light: #ffffff;
             --border-light: #e2e8f0;
             --text-dark: #0f172a;
             --text-medium: #334155;
-
-            /* Accents */
             --accent-blue: #0066ff;
             --accent-blue-hover: #0052cc;
             --accent-cyan: #00d2ff;
@@ -38,12 +30,8 @@
             --accent-amber-hover: #d97706;
             --accent-green: #10b981;
             --accent-red: #ef4444;
-
-            /* Fonts */
             --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
             --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-
-            /* Spacing & Sizing */
             --container-max: 1280px;
             --header-h: 72px;
             --radius-sm: 6px;
@@ -57,13 +45,8 @@
             --transition-fast: 150ms ease;
             --transition-base: 300ms ease;
         }
-
-        @media (prefers-color-scheme: dark) {
-            /* System dark mode not forced, we control themes per section */
-        }
-
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        html { scroll-behavior: smooth; font-size: 16px; -webkit-font-smoothing: antialiased; }
         body { font-family: var(--font-sans); background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
         img { max-width: 100%; height: auto; display: block; }
         a { color: inherit; text-decoration: none; }
@@ -73,15 +56,8 @@
         input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent-blue); box-shadow: 0 0 0 3px rgba(0,102,255,0.15); }
         label { display: block; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-medium); font-size: 0.875rem; }
         .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 1.5rem; }
-        .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-
-        /* ============================================================
-           TYPOGRAPHY & UTILITIES
-           ============================================================ */
         .section { padding: 6rem 0; position: relative; z-index: 1; }
         .section--dark { background: var(--bg-deep); color: var(--text-primary); }
-        .section--dark .section-title { color: var(--text-primary); }
-        .section--dark .section-subtitle { color: var(--text-secondary); }
         .section-title { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; line-height: 1.2; margin-bottom: 1rem; letter-spacing: -0.02em; }
         .section-subtitle { font-size: clamp(1rem, 2vw, 1.125rem); color: var(--text-secondary); max-width: 70ch; }
         .section-header { text-align: center; margin-bottom: 4rem; }
@@ -91,364 +67,104 @@
         .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.875rem 1.75rem; border-radius: var(--radius-md); font-weight: 600; font-size: 0.9375rem; transition: all var(--transition-fast); white-space: nowrap; }
         .btn--primary { background: var(--accent-blue); color: white; box-shadow: var(--shadow-glow-blue); }
         .btn--primary:hover { background: var(--accent-blue-hover); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,102,255,0.3); }
-        .btn--primary:active { transform: translateY(0); }
         .btn--secondary { background: transparent; color: var(--text-primary); border: 1px solid var(--border-dark); }
-        .section--light .btn--secondary { color: var(--text-dark); border-color: var(--border-light); }
         .btn--secondary:hover { background: var(--bg-card-dark); border-color: var(--accent-cyan); color: var(--accent-cyan); }
-        .section--light .btn--secondary:hover { background: var(--bg-light); border-color: var(--accent-blue); color: var(--accent-blue); }
-        .btn--amber { background: var(--accent-amber); color: var(--bg-deep); box-shadow: var(--shadow-glow-amber); }
-        .btn--amber:hover { background: var(--accent-amber-hover); transform: translateY(-2px); }
         .btn svg { width: 20px; height: 20px; flex-shrink: 0; }
-
-        /* ============================================================
-           HEADER & NAVIGATION
-           ============================================================ */
-        .header { position: fixed; top: 0; left: 0; right: 0; height: var(--header-h); z-index: 1000; background: rgba(6,13,24,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-dark); transition: background var(--transition-base); }
-        .header.scrolled { background: rgba(6,13,24,0.98); box-shadow: var(--shadow-lg); }
+        .header { position: fixed; top: 0; left: 0; right: 0; height: var(--header-h); z-index: 1000; background: rgba(6,13,24,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-dark); }
         .header__inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
-        .logo { display: flex; align-items: center; gap: 0.75rem; font-weight: 700; font-size: 1.125rem; color: var(--text-primary); letter-spacing: -0.01em; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; font-weight: 700; font-size: 1.125rem; color: var(--text-primary); }
         .logo__mark { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: 0.75rem; color: white; }
-        .logo__text { display: none; }
-        @media (min-width: 768px) { .logo__text { display: block; } }
-
-        .nav { display: none; }
-        @media (min-width: 768px) {
-            .nav { display: flex; align-items: center; gap: 0.5rem; }
-            .nav__link { padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 500; color: var(--text-secondary); border-radius: var(--radius-sm); transition: all var(--transition-fast); position: relative; }
-            .nav__link::after { content: ''; position: absolute; bottom: 0.25rem; left: 50%; width: 0; height: 2px; background: var(--accent-cyan); transition: all var(--transition-base); transform: translateX(-50%); border-radius: 2px; }
-            .nav__link:hover, .nav__link.active { color: var(--text-primary); }
-            .nav__link:hover::after, .nav__link.active::after { width: 80%; }
-        }
-
-        .header__cta { display: none; }
-        @media (min-width: 640px) { .header__cta { display: flex; } }
-
-        .mobile-menu-btn { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: var(--radius-sm); color: var(--text-primary); }
-        @media (min-width: 768px) { .mobile-menu-btn { display: none; } }
-        .mobile-menu-btn svg { width: 24px; height: 24px; }
-
-        /* Mobile Menu Overlay */
-        .mobile-menu { position: fixed; inset: 0; z-index: 999; background: var(--bg-deep); padding: calc(var(--header-h) + 2rem) 1.5rem 2rem; transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; gap: 1.5rem; overflow-y: auto; }
-        .mobile-menu.open { transform: translateX(0); }
-        .mobile-menu__link { font-size: 1.5rem; font-weight: 600; color: var(--text-secondary); padding: 0.5rem 0; border-bottom: 1px solid var(--border-dark); transition: color var(--transition-fast); }
-        .mobile-menu__link:hover { color: var(--accent-cyan); }
-        .mobile-menu__cta { margin-top: 1rem; padding: 1rem; text-align: center; }
-
-        /* ============================================================
-           HERO SECTION
-           ============================================================ */
+        .nav { display: flex; align-items: center; gap: 0.5rem; }
+        .nav__link { padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 500; color: var(--text-secondary); border-radius: var(--radius-sm); transition: all var(--transition-fast); }
+        .nav__link:hover, .nav__link.active { color: var(--text-primary); }
         .hero { min-height: 100vh; display: flex; align-items: center; padding-top: var(--header-h); background: var(--bg-deep); position: relative; overflow: hidden; }
-        .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 60vw; height: 60vw; max-width: 600px; max-height: 600px; background: radial-gradient(circle, rgba(0,102,255,0.08) 0%, transparent 70%); pointer-events: none; z-index: 0; }
-        .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 150px; background: linear-gradient(to top, var(--bg-deep), transparent); pointer-events: none; z-index: 1; }
-        .hero__grid { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; position: relative; z-index: 2; width: 100%; }
-        @media (min-width: 1024px) { .hero__grid { grid-template-columns: 1.1fr 0.9fr; } }
-        .hero__content { padding-bottom: 2rem; }
-        .hero__tag { margin-bottom: 1.5rem; }
-        .hero__title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; color: var(--text-primary); margin-bottom: 1.5rem; }
+        .hero__grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; align-items: center; position: relative; z-index: 2; width: 100%; }
+        .hero__title { font-size: clamp(2rem, 4.5vw, 3.25rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.03em; color: var(--text-primary); margin-bottom: 1.5rem; }
         .hero__title span { color: var(--accent-cyan); background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero__desc { font-size: 1.125rem; color: var(--text-secondary); max-width: 55ch; margin-bottom: 2.5rem; line-height: 1.7; }
+        .hero__desc { font-size: 1.0625rem; color: var(--text-secondary); max-width: 55ch; margin-bottom: 2.5rem; line-height: 1.7; }
         .hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
         .hero__stats { display: flex; flex-wrap: wrap; gap: 2.5rem; font-family: var(--font-mono); }
-        .hero__stat { display: flex; flex-direction: column; gap: 0.25rem; }
         .hero__stat-value { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); }
-        .hero__stat-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-
-        /* Hero Terminal Mockup */
+        .hero__stat-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; display: block; }
         .hero__mockup { position: relative; border-radius: var(--radius-lg); background: var(--bg-dark); border: 1px solid var(--border-dark); box-shadow: var(--shadow-lg), var(--shadow-glow-blue); overflow: hidden; min-height: 480px; display: flex; flex-direction: column; }
         .mockup__header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; background: var(--bg-deep); border-bottom: 1px solid var(--border-dark); }
         .mockup__dots { display: flex; gap: 0.5rem; }
-        .mockup__dot { width: 12px; height: 12px; border-radius: 50%; background: var(--border-dark); }
+        .mockup__dot { width: 12px; height: 12px; border-radius: 50%; }
         .mockup__dot:nth-child(1) { background: #ff5f57; }
         .mockup__dot:nth-child(2) { background: #ffbd2e; }
         .mockup__dot:nth-child(3) { background: #28ca42; }
         .mockup__title { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); text-align: center; flex: 1; }
         .mockup__tabs { display: flex; background: var(--bg-card-dark); border-bottom: 1px solid var(--border-dark); padding: 0 0.5rem; }
-        .mockup__tab { padding: 0.875rem 1.25rem; font-size: 0.8125rem; font-weight: 500; color: var(--text-secondary); border-radius: var(--radius-sm) var(--radius-sm) 0 0; margin-right: 0.25rem; transition: all var(--transition-fast); cursor: pointer; white-space: nowrap; position: relative; }
-        .mockup__tab:hover { color: var(--text-primary); background: var(--bg-deep); }
-        .mockup__tab.active { color: var(--accent-cyan); background: var(--bg-dark); }
-        .mockup__tab.active::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background: var(--accent-cyan); }
-        .mockup__panel { display: none; flex: 1; overflow: auto; padding: 1.5rem; }
-        .mockup__panel.active { display: block; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
-
-        /* Tab 1: Passenger RMS */
+        .mockup__tab { padding: 0.875rem 1.25rem; font-size: 0.8125rem; font-weight: 500; color: var(--text-secondary); cursor: pointer; }
+        .mockup__tab.active { color: var(--accent-cyan); background: var(--bg-dark); border-bottom: 2px solid var(--accent-cyan); }
+        .mockup__panel { padding: 1.5rem; flex: 1; }
         .rms-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-        @media (max-width: 600px) { .rms-grid { grid-template-columns: 1fr; } }
-        .rms-card { background: var(--bg-deep); border: 1px solid var(--border-dark); border-radius: var(--radius-md); padding: 1.25rem; transition: border-color var(--transition-fast); }
-        .rms-card:hover { border-color: rgba(0,210,255,0.3); }
+        .rms-card { background: var(--bg-deep); border: 1px solid var(--border-dark); border-radius: var(--radius-md); padding: 1.25rem; }
         .rms-card__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-dark); }
         .rms-card__title { font-size: 0.8125rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
         .rms-card__badge { font-family: var(--font-mono); font-size: 0.625rem; padding: 0.125rem 0.5rem; border-radius: 4px; background: rgba(0,210,255,0.15); color: var(--accent-cyan); border: 1px solid rgba(0,210,255,0.2); }
-        .rms-card__badge--amber { background: rgba(245,158,11,0.15); color: var(--accent-amber); border-color: rgba(245,158,11,0.2); }
         .nesting-table { font-family: var(--font-mono); font-size: 0.75rem; line-height: 2; }
-        .nesting-row { display: flex; justify-content: space-between; align-items: center; padding: 0.25rem 0; }
-        .nesting-row:not(:last-child) { border-bottom: 1px dashed var(--border-dark); }
+        .nesting-row { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed var(--border-dark); padding: 0.25rem 0; }
         .nesting-class { font-weight: 600; color: var(--text-primary); }
         .nesting-avail { color: var(--accent-green); }
         .nesting-nested { color: var(--text-muted); text-decoration: line-through; }
-        .nesting-bar { height: 6px; background: var(--bg-card-dark); border-radius: 3px; margin-top: 1rem; overflow: hidden; position: relative; }
-        .nesting-bar__fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan)); transition: width 0.5s ease; }
-        .nesting-bar__fill--amber { background: linear-gradient(90deg, var(--accent-amber), #fbbf24); }
-        .overbooking-info { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem; font-size: 0.8125rem; }
-        .ob-item { display: flex; justify-content: space-between; }
-        .ob-item__label { color: var(--text-secondary); }
-        .ob-item__value { font-family: var(--font-mono); font-weight: 600; color: var(--text-primary); }
-        .segment-map { display: flex; flex-direction: column; gap: 0.5rem; }
-        .segment-row { display: flex; gap: 0.25rem; align-items: center; font-size: 0.75rem; font-family: var(--font-mono); }
-        .segment-port { min-width: 80px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .segment-leg { flex: 1; height: 14px; border-radius: 4px; position: relative; background: var(--bg-card-dark); }
-        .segment-leg__block { position: absolute; top: 0; bottom: 0; border-radius: 4px; opacity: 0.9; transition: opacity var(--transition-fast); }
-        .segment-leg__block:hover { opacity: 1; }
-        .segment-leg__block--sold { background: var(--accent-red); }
-        .segment-leg__block--quota { background: var(--accent-amber); }
-        .segment-leg__block--free { background: var(--accent-green); }
-        .segment-leg__block--nested { background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan)); }
-
-        /* Tab 2: Cargo Manifest */
-        .cargo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        @media (max-width: 600px) { .cargo-grid { grid-template-columns: 1fr; } }
-        .cargo-ship { grid-row: span 2; background: var(--bg-deep); border: 1px solid var(--border-dark); border-radius: var(--radius-md); padding: 1.25rem; position: relative; display: flex; flex-direction: column; }
-        .ship-schema { flex: 1; display: flex; flex-direction: column; gap: 0.75rem; position: relative; }
-        .ship-deck { height: 40px; background: linear-gradient(180deg, #1a2a4a, #0e1e33); border: 1px solid var(--border-dark); border-radius: var(--radius-sm) var(--radius-sm) 0 0; position: relative; display: flex; align-items: flex-end; padding: 0 0.5rem; gap: 0.25rem; }
-        .ship-deck__slot { flex: 1; background: var(--bg-card-dark); border-radius: 3px 3px 0 0; border: 1px solid var(--border-dark); position: relative; min-height: 100%; display: flex; align-items: flex-end; padding-bottom: 2px; }
-        .ship-deck__slot::after { content: attr(data-load); position: absolute; top: -1.25rem; left: 50%; transform: translateX(-50%); font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-muted); white-space: nowrap; }
-        .ship-deck__fill { width: 100%; background: linear-gradient(180deg, var(--accent-amber), #b45309); border-radius: 3px 3px 0 0; transition: height 0.5s ease; }
-        .ship-holds { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; padding: 0.5rem 0; }
-        .ship-hold { background: var(--bg-card-dark); border: 1px solid var(--border-dark); border-radius: var(--radius-sm); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1rem; gap: 0.5rem; position: relative; }
-        .ship-hold::before { content: attr(data-name); font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); position: absolute; top: 0.5rem; left: 0.5rem; }
-        .hold-fill { width: 60px; height: 60px; border-radius: 50%; background: conic-gradient(var(--accent-blue) calc(var(--fill, 0) * 1%), transparent 0); display: flex; align-items: center; justify-content: center; position: relative; }
-        .hold-fill::after { content: ''; width: 48px; height: 48px; border-radius: 50%; background: var(--bg-deep); }
-        .hold-fill__val { position: relative; z-index: 1; font-family: var(--font-mono); font-weight: 700; font-size: 0.875rem; color: var(--text-primary); }
-        .hold-meta { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); text-align: center; line-height: 1.5; }
-        .cargo-list { background: var(--bg-deep); border: 1px solid var(--border-dark); border-radius: var(--radius-md); overflow: hidden; }
-        .cargo-list__header { padding: 1rem 1.25rem; border-bottom: 1px solid var(--border-dark); font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 1rem; text-transform: uppercase; letter-spacing: 0.05em; }
-        .cargo-list__body { max-height: 280px; overflow-y: auto; }
-        .cargo-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 1rem; padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--border-dark); align-items: center; font-size: 0.8125rem; transition: background var(--transition-fast); }
-        .cargo-row:hover { background: var(--bg-card-dark); }
-        .cargo-row__name { color: var(--text-primary); font-weight: 500; }
-        .cargo-row__type { color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.7rem; }
-        .cargo-row__status { display: inline-flex; align-items: center; gap: 0.375rem; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; padding: 0.25rem 0.5rem; border-radius: 4px; }
-        .status-signed { background: rgba(16,185,129,0.15); color: var(--accent-green); border: 1px solid rgba(16,185,129,0.2); }
-        .status-pending { background: rgba(245,158,11,0.15); color: var(--accent-amber); border: 1px solid rgba(245,158,11,0.2); }
-        .status-draft { background: rgba(100,116,139,0.15); color: var(--text-muted); border: 1px solid rgba(100,116,139,0.2); }
-        .status-error { background: rgba(239,68,68,0.15); color: var(--accent-red); border: 1px solid rgba(239,68,68,0.2); }
-        .cargo-row__gis { color: var(--text-muted); font-family: var(--font-mono); font-size: 0.7rem; }
-
-        /* ============================================================
-           PRODUCTS SECTION
-           ============================================================ */
+        .nesting-bar { height: 6px; background: var(--bg-card-dark); border-radius: 3px; margin-top: 1rem; overflow: hidden; }
+        .nesting-bar__fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan)); }
         .products { background: var(--bg-white); }
-        .products__grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-        @media (min-width: 768px) { .products__grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (min-width: 1024px) { .products__grid { grid-template-columns: repeat(4, 1fr); } }
-        .product-card { background: var(--bg-card-light); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 2rem; transition: all var(--transition-base); position: relative; overflow: hidden; display: flex; flex-direction: column; }
-        .product-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--accent-color, var(--accent-blue)); transform: scaleX(0); transform-origin: left; transition: transform var(--transition-base); }
-        .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: transparent; }
-        .product-card:hover::before { transform: scaleX(1); }
-        .product-card__icon { width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--icon-bg, rgba(0,102,255,0.1)); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: var(--accent-color, var(--accent-blue)); flex-shrink: 0; }
-        .product-card__icon svg { width: 24px; height: 24px; }
+        .products__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .product-card { background: var(--bg-card-light); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 2rem; display: flex; flex-direction: column; transition: all var(--transition-base); }
+        .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
         .product-card__title { font-size: 1.125rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.75rem; }
         .product-card__desc { font-size: 0.9375rem; color: var(--text-medium); margin-bottom: 1.5rem; flex: 1; line-height: 1.6; }
-        .product-card__features { display: flex; flex-direction: column; gap: 0.625rem; font-size: 0.875rem; color: var(--text-medium); }
-        .product-card__features li { display: flex; align-items: flex-start; gap: 0.625rem; position: relative; padding-left: 0.25rem; }
-        .product-card__features li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color, var(--accent-blue)); margin-top: 0.5rem; flex-shrink: 0; opacity: 0.6; }
-
-        /* ============================================================
-           ARCHITECTURE SECTION
-           ============================================================ */
-        .architecture { background: var(--bg-deep); }
-        .arch__svg { width: 100%; height: 100%; max-height: 600px; display: block; }
-        .arch__legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem 2rem; margin-top: 2.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-secondary); }
-        .arch__legend-item { display: flex; align-items: center; gap: 0.5rem; }
-        .arch__legend-dot { width: 10px; height: 10px; border-radius: 50%; }
-
-        /* ============================================================
-           RMS DEEP DIVE & CALCULATOR
-           ============================================================ */
+        .product-card__features li { font-size: 0.875rem; color: var(--text-medium); margin-bottom: 0.5rem; position: relative; padding-left: 1rem; }
+        .product-card__features li::before { content: '•'; position: absolute; left: 0; color: var(--accent-blue); }
+        .architecture { background: var(--bg-deep); color: var(--text-primary); }
         .rms-deep { background: var(--bg-light); }
-        .rms-deep__grid { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: start; }
-        @media (min-width: 992px) { .rms-deep__grid { grid-template-columns: 1fr 1fr; } }
-        .rms-theory { display: flex; flex-direction: column; gap: 2rem; }
-        .theory-card { background: var(--bg-white); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 2rem; }
-        .theory-card__title { font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
-        .theory-card__title svg { width: 24px; height: 24px; color: var(--accent-blue); flex-shrink: 0; }
-        .theory-list { display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.9375rem; color: var(--text-medium); }
-        .theory-list li { display: flex; gap: 0.75rem; }
-        .theory-list li::before { content: '▹'; color: var(--accent-cyan); font-family: var(--font-mono); font-size: 1rem; line-height: 1.5; flex-shrink: 0; }
-        .formula-box { background: var(--bg-deep); border: 1px solid var(--border-dark); border-radius: var(--radius-md); padding: 1.5rem; font-family: var(--font-mono); font-size: 0.875rem; color: var(--accent-cyan); overflow-x: auto; line-height: 1.8; white-space: pre-wrap; }
-
-        .calculator { background: var(--bg-white); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 2rem; position: sticky; top: 100px; box-shadow: var(--shadow-md); }
-        .calc__title { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; }
-        .calc__subtitle { font-size: 0.875rem; color: var(--text-medium); margin-bottom: 2rem; }
-        .calc__input-group { margin-bottom: 1.5rem; }
-        .calc__label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-        .calc__label { font-size: 0.875rem; font-weight: 500; color: var(--text-dark); }
-        .calc__value { font-family: var(--font-mono); font-weight: 600; color: var(--accent-blue); font-size: 1rem; }
-        .calc__slider { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 3px; background: var(--border-light); outline: none; cursor: pointer; }
-        .calc__slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--accent-blue); cursor: pointer; box-shadow: 0 2px 6px rgba(0,102,255,0.3); transition: transform var(--transition-fast), box-shadow var(--transition-fast); }
-        .calc__slider::-webkit-slider-thumb:hover { transform: scale(1.2); box-shadow: 0 4px 12px rgba(0,102,255,0.4); }
-        .calc__slider::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--accent-blue); border: none; cursor: pointer; }
+        .rms-deep__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+        .theory-card { background: var(--bg-white); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 1.5rem; }
+        .theory-card__title { font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; }
+        .formula-box { background: var(--bg-deep); border: 1px solid var(--border-dark); border-radius: var(--radius-md); padding: 1.25rem; font-family: var(--font-mono); font-size: 0.8125rem; color: var(--accent-cyan); overflow-x: auto; margin-top: 1rem; }
+        .calculator { background: var(--bg-white); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-md); position: sticky; top: 100px; }
+        .calc__input-group { margin-bottom: 1.25rem; }
+        .calc__label-row { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.875rem; font-weight: 500; }
+        .calc__value { font-family: var(--font-mono); font-weight: 600; color: var(--accent-blue); }
+        .calc__slider { width: 100%; accent-color: var(--accent-blue); }
         .calc__results { border-top: 1px solid var(--border-light); padding-top: 1.5rem; margin-top: 1rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
         .calc__result-item { background: var(--bg-light); border-radius: var(--radius-md); padding: 1rem; text-align: center; }
-        .calc__result-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
-        .calc__result-value { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; color: var(--text-dark); }
-        .calc__result-value--accent { color: var(--accent-amber); }
-        .calc__total { grid-column: 1 / -1; background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); color: white; padding: 1.25rem; font-size: 1.125rem; }
-        .calc__total .calc__result-label { color: rgba(255,255,255,0.7); }
-        .calc__total .calc__result-value { color: white; font-size: 2rem; }
-
-        /* ============================================================
-           COMPLIANCE SECTION
-           ============================================================ */
+        .calc__result-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.25rem; }
+        .calc__result-value { font-family: var(--font-mono); font-size: 1.25rem; font-weight: 700; color: var(--text-dark); }
+        .calc__total { grid-column: 1 / -1; background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); color: white; padding: 1.25rem; text-align: center; border-radius: var(--radius-md); }
+        .calc__total .calc__result-label { color: rgba(255,255,255,0.8); }
+        .calc__total .calc__result-value { color: white; font-size: 1.75rem; }
         .compliance { background: var(--bg-white); }
-        .compliance__grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-        @media (min-width: 640px) { .compliance__grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (min-width: 1024px) { .compliance__grid { grid-template-columns: repeat(3, 1fr); } }
-        .compliance-card { background: var(--bg-card-light); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 2rem; display: flex; flex-direction: column; transition: all var(--transition-base); }
-        .compliance-card:hover { border-color: var(--accent-blue); box-shadow: var(--shadow-md); }
-        .compliance-card__icon { width: 48px; height: 48px; border-radius: var(--radius-md); background: rgba(0,102,255,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; color: var(--accent-blue); }
-        .compliance-card__icon svg { width: 24px; height: 24px; }
-        .compliance-card__title { font-size: 1.125rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.75rem; }
-        .compliance-card__desc { font-size: 0.9375rem; color: var(--text-medium); line-height: 1.6; flex: 1; }
-        .compliance-card__tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-light); }
-        .compliance-tag { font-family: var(--font-mono); font-size: 0.6875rem; font-weight: 500; padding: 0.25rem 0.625rem; border-radius: 4px; background: var(--bg-light); border: 1px solid var(--border-light); color: var(--text-medium); }
-
-        /* ============================================================
-           DEPLOYMENT MODELS
-           ============================================================ */
+        .compliance__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .compliance-card { background: var(--bg-card-light); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 2rem; display: flex; flex-direction: column; }
+        .compliance-tag { font-family: var(--font-mono); font-size: 0.6875rem; padding: 0.25rem 0.5rem; border-radius: 4px; background: var(--bg-light); border: 1px solid var(--border-light); color: var(--text-medium); display: inline-block; margin-top: 0.5rem; margin-right: 0.25rem; }
         .deployment { background: var(--bg-light); }
-        .deploy__grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        @media (min-width: 992px) { .deploy__grid { grid-template-columns: repeat(2, 1fr); } }
-        .deploy-card { background: var(--bg-white); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 2.5rem; display: flex; flex-direction: column; position: relative; }
-        .deploy-card__header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-light); }
-        .deploy-card__icon { width: 56px; height: 56px; border-radius: var(--radius-md); background: var(--icon-bg, rgba(0,102,255,0.1)); display: flex; align-items: center; justify-content: center; color: var(--accent-color, var(--accent-blue)); flex-shrink: 0; }
-        .deploy-card__icon svg { width: 28px; height: 28px; }
-        .deploy-card__badge { font-family: var(--font-mono); font-size: 0.625rem; font-weight: 600; padding: 0.25rem 0.625rem; border-radius: 100px; background: var(--badge-bg, rgba(0,102,255,0.1)); color: var(--badge-color, var(--accent-blue)); border: 1px solid var(--badge-border, rgba(0,102,255,0.2)); white-space: nowrap; align-self: flex-start; }
-        .deploy-card__title { font-size: 1.5rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.5rem; }
-        .deploy-card__subtitle { font-size: 1rem; color: var(--text-medium); }
-        .deploy-card__list { flex: 1; display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
-        .deploy-item { display: flex; gap: 1rem; padding: 1rem; background: var(--bg-light); border-radius: var(--radius-md); border: 1px solid var(--border-light); transition: all var(--transition-fast); }
-        .deploy-item:hover { border-color: var(--accent-blue); background: white; }
-        .deploy-item__icon { width: 24px; height: 24px; color: var(--accent-color, var(--accent-blue)); flex-shrink: 0; margin-top: 0.125rem; }
-        .deploy-item__text { font-size: 0.9375rem; color: var(--text-medium); line-height: 1.6; }
-        .deploy-item__text strong { color: var(--text-dark); display: block; margin-bottom: 0.25rem; font-size: 0.875rem; }
-        .deploy-card__footer { padding-top: 1.5rem; border-top: 1px solid var(--border-light); }
-        .deploy-card__btn { width: 100%; }
-
-        /* ============================================================
-           FAQ ACCORDION
-           ============================================================ */
+        .deploy__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .deploy-card { background: var(--bg-white); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 2.5rem; display: flex; flex-direction: column; }
+        .deploy-item { display: flex; gap: 1rem; padding: 1rem; background: var(--bg-light); border-radius: var(--radius-md); margin-bottom: 0.75rem; font-size: 0.9375rem; }
         .faq { background: var(--bg-white); }
-        .faq__list { display: flex; flex-direction: column; gap: 1rem; max-width: 900px; margin: 0 auto; }
-        .faq__item { border: 1px solid var(--border-light); border-radius: var(--radius-md); background: var(--bg-card-light); overflow: hidden; transition: border-color var(--transition-fast), box-shadow var(--transition-fast); }
-        .faq__item:hover { border-color: var(--accent-blue); box-shadow: var(--shadow-sm); }
-        .faq__question { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 1.5rem; text-align: left; font-size: 1rem; font-weight: 600; color: var(--text-dark); gap: 1rem; }
-        .faq__question svg { width: 24px; height: 24px; color: var(--text-muted); flex-shrink: 0; transition: transform var(--transition-base); }
-        .faq__item.active .faq__question svg { transform: rotate(180deg); color: var(--accent-blue); }
-        .faq__answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; }
-        .faq__answer-inner { padding: 0 1.5rem 1.5rem; color: var(--text-medium); line-height: 1.7; font-size: 0.9375rem; }
-        .faq__answer-inner code { font-family: var(--font-mono); background: var(--bg-light); padding: 0.125rem 0.375rem; border-radius: 4px; font-size: 0.875em; color: var(--accent-blue); }
-
-        /* ============================================================
-           LEAD FORM / DOWNLOAD SECTION
-           ============================================================ */
-        .lead { background: var(--bg-deep); position: relative; overflow: hidden; }
-        .lead::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80vw; height: 80vw; max-width: 800px; max-height: 800px; background: radial-gradient(circle, rgba(0,102,255,0.06) 0%, transparent 60%); pointer-events: none; }
-        .lead__grid { display: grid; grid-template-columns: 1fr; gap: 3rem; position: relative; z-index: 1; }
-        @media (min-width: 992px) { .lead__grid { grid-template-columns: 1fr 1.2fr; align-items: start; } }
-        .lead__info { padding-right: 2rem; }
-        .lead__title { color: var(--text-primary); }
-        .lead__desc { color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.0625rem; }
-        .lead__packages { display: flex; flex-direction: column; gap: 1rem; }
-        .package-card { background: var(--bg-card-dark); border: 1px solid var(--border-dark); border-radius: var(--radius-md); padding: 1.25rem; display: flex; align-items: center; gap: 1rem; transition: all var(--transition-fast); cursor: pointer; }
-        .package-card:hover { border-color: rgba(0,210,255,0.3); background: var(--bg-dark); }
-        .package-card input { position: absolute; opacity: 0; pointer-events: none; }
-        .package-card__icon { width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--pkg-color, rgba(0,102,255,0.15)); display: flex; align-items: center; justify-content: center; color: var(--pkg-color, var(--accent-blue)); flex-shrink: 0; }
-        .package-card__icon svg { width: 24px; height: 24px; }
-        .package-card__content { flex: 1; }
-        .package-card__name { font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem; }
-        .package-card__desc { font-size: 0.8125rem; color: var(--text-muted); font-family: var(--font-mono); }
-        .package-card__check { width: 24px; height: 24px; border: 2px solid var(--border-dark); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: var(--accent-cyan); transition: all var(--transition-fast); flex-shrink: 0; }
-        .package-card__check svg { width: 14px; height: 14px; opacity: 0; transform: scale(0.5); transition: all var(--transition-fast); }
-        .package-card:has(input:checked) { border-color: var(--accent-cyan); background: rgba(0,210,255,0.05); }
-        .package-card:has(input:checked) .package-card__check { border-color: var(--accent-cyan); background: var(--accent-cyan); }
-        .package-card:has(input:checked) .package-card__check svg { opacity: 1; transform: scale(1); }
-
-        .lead__form { background: var(--bg-card-dark); border: 1px solid var(--border-dark); border-radius: var(--radius-lg); padding: 2.5rem; box-shadow: var(--shadow-lg); }
-        .form__row { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin-bottom: 1.25rem; }
-        @media (min-width: 640px) { .form__row--half { grid-template-columns: 1fr 1fr; } }
-        .form__group { display: flex; flex-direction: column; gap: 0.5rem; }
-        .form__submit { width: 100%; margin-top: 0.5rem; padding: 1rem; font-size: 1rem; }
-        .form__consent { font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-top: 1rem; line-height: 1.5; }
-        .form__consent a { color: var(--accent-cyan); text-decoration: underline; }
-        .form__status { display: none; padding: 1.5rem; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); border-radius: var(--radius-md); color: var(--accent-green); text-align: center; animation: fadeIn 0.3s ease; }
-        .form__status.visible { display: block; }
-        .form__status svg { width: 48px; height: 48px; margin-bottom: 1rem; }
-        .form__status-title { font-weight: 600; font-size: 1.125rem; margin-bottom: 0.5rem; }
-        .form__status-text { font-size: 0.9375rem; opacity: 0.9; }
-
-        /* ============================================================
-           FOOTER
-           ============================================================ */
-        .footer { background: var(--bg-deep); border-top: 1px solid var(--border-dark); padding: 3rem 0 1.5rem; }
-        .footer__grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; margin-bottom: 2.5rem; }
-        @media (min-width: 640px) { .footer__grid { grid-template-columns: 2fr repeat(3, 1fr); } }
-        .footer__brand { max-width: 300px; }
-        .footer__logo { margin-bottom: 1rem; }
-        .footer__tagline { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem; }
-        .footer__social { display: flex; gap: 1rem; }
-        .footer__social-link { width: 40px; height: 40px; border-radius: var(--radius-sm); background: var(--bg-card-dark); border: 1px solid var(--border-dark); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); transition: all var(--transition-fast); }
-        .footer__social-link:hover { background: var(--accent-blue); border-color: var(--accent-blue); color: white; transform: translateY(-2px); }
-        .footer__social-link svg { width: 20px; height: 20px; }
-        .footer__col-title { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 1rem; }
-        .footer__links { display: flex; flex-direction: column; gap: 0.75rem; }
-        .footer__link { font-size: 0.9375rem; color: var(--text-secondary); transition: color var(--transition-fast); }
-        .footer__link:hover { color: var(--accent-cyan); }
-        .footer__bottom { padding-top: 1.5rem; border-top: 1px solid var(--border-dark); display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align center; font-size: 0.8125rem; color: var(--text-muted); }
-        @media (min-width: 640px) { .footer__bottom { flex-direction: row; justify-content: space-between; text-align: left; } }
-        .footer__legal { display: flex; gap: 1.5rem; }
-        .footer__legal-link { color: var(--text-muted); transition: color var(--transition-fast); }
-        .footer__legal-link:hover { color: var(--text-primary); }
-
-        /* ============================================================
-           ANIMATIONS & SCROLL REVEAL
-           ============================================================ */
-        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .reveal.visible { opacity: 1; transform: none; }
-        .reveal-delay-1 { transition-delay: 100ms; }
-        .reveal-delay-2 { transition-delay: 200ms; }
-        .reveal-delay-3 { transition-delay: 300ms; }
-        .reveal-delay-4 { transition-delay: 400ms; }
-
-        /* ============================================================
-           TOAST NOTIFICATION
-           ============================================================ */
-        .toast { position: fixed; bottom: 2rem; right: 2rem; z-index: 2000; background: var(--bg-dark); border: 1px solid var(--border-dark); border-radius: var(--radius-md); padding: 1rem 1.5rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-lg); transform: translateY(120%); opacity: 0; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        .toast.visible { transform: translateY(0); opacity: 1; }
-        .toast--success { border-color: rgba(16,185,129,0.3); }
-        .toast__icon { width: 24px; height: 24px; color: var(--accent-green); flex-shrink: 0; }
-        .toast__text { font-size: 0.9375rem; color: var(--text-primary); }
-
-        /* ============================================================
-           REDUCED MOTION
-           ============================================================ */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
-        }
+        .faq__list { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+        .faq__item { border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 1.25rem 1.5rem; }
+        .faq__question { font-weight: 600; cursor: pointer; }
+        .faq__answer { margin-top: 1rem; color: var(--text-medium); font-size: 0.9375rem; line-height: 1.7; }
+        .lead { background: var(--bg-deep); color: var(--text-primary); }
+        .lead__grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; }
+        .lead__form { background: var(--bg-card-dark); border: 1px solid var(--border-dark); border-radius: var(--radius-lg); padding: 2.5rem; }
+        .form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem; }
+        .footer { background: var(--bg-deep); border-top: 1px solid var(--border-dark); padding: 3rem 0 1.5rem; color: var(--text-secondary); }
+        .footer__grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 2.5rem; }
     </style>
 </head>
 <body>
-
-    <!-- ============================================================
-         HEADER
-         ============================================================ -->
-    <header class="header" id="header" role="banner">
+    <header class="header" id="header">
         <div class="container header__inner">
-            <a href="#" class="logo" aria-label="СВТР — Главная">
-                <span class="logo__mark" aria-hidden="true">СВТР</span>
-                <span class="logo__text">Современные высокотехнологические решения</span>
+            <a href="#" class="logo">
+                <span class="logo__mark">СВТР</span>
+                <span>Современные высокотехнологические решения</span>
             </a>
-            <nav class="nav" id="nav" role="navigation" aria-label="Основная навигация">
+            <nav class="nav">
                 <a href="#products" class="nav__link">Продукты</a>
                 <a href="#architecture" class="nav__link">Архитектура</a>
                 <a href="#rms-deep" class="nav__link">Математика RMS</a>
@@ -456,57 +172,32 @@
                 <a href="#deployment" class="nav__link">Внедрение</a>
                 <a href="#faq" class="nav__link">FAQ</a>
             </nav>
-            <a href="#lead" class="btn btn--primary header__cta">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                Скачать презентации
-            </a>
-            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobileMenu">
-                <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-        </div>
-        <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Мобильное меню">
-            <a href="#products" class="mobile-menu__link">Продукты</a>
-            <a href="#architecture" class="mobile-menu__link">Архитектура</a>
-            <a href="#rms-deep" class="mobile-menu__link">Математика RMS</a>
-            <a href="#compliance" class="mobile-menu__link">Регуляторика</a>
-            <a href="#deployment" class="mobile-menu__link">Модели внедрения</a>
-            <a href="#faq" class="mobile-menu__link">FAQ</a>
-            <a href="#lead" class="btn btn--primary mobile-menu__cta">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                Скачать презентации
-            </a>
+            <a href="#lead" class="btn btn--primary">Скачать презентации</a>
         </div>
     </header>
 
-    <!-- ============================================================
-         HERO SECTION
-         ============================================================ -->
-    <section class="hero" aria-labelledby="hero-title">
+    <section class="hero">
         <div class="container hero__grid">
-            <div class="hero__content reveal">
-                <span class="tag hero__tag">Enterprise B2B / Maritime Tech</span>
-                <h1 id="hero-title" class="hero__title">Единая программная платформа для управления пассажирскими и грузовыми перевозками речного и смешанного флота</h1>
+            <div class="hero__content">
+                <span class="tag">Enterprise B2B / Maritime Tech</span>
+                <h1 class="hero__title">Единая программная платформа для управления перевозками <span>речного и смешанного флота</span></h1>
                 <p class="hero__desc">Hosted CRS, RMS с алгоритмами Serial/Parallel Nesting и управляемым овербукингом, омниканальный E-Ticketing и юридически значимая ЭТрН. Развертывание в защищенном контуре СВТР (SaaS) или On-Premise. Полное соответствие 54-ФЗ, 152-ФЗ, АЦБПДП, ГИС ЭПД, Реестру ПО РФ.</p>
                 <div class="hero__actions">
-                    <a href="#lead" class="btn btn--primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                        Получить технические меморандумы
-                    </a>
+                    <a href="#lead" class="btn btn--primary">Получить технические меморандумы</a>
                     <a href="#architecture" class="btn btn--secondary">Архитектура решения</a>
                 </div>
-                <div class="hero__stats" aria-label="Ключевые метрики платформы">
+                <div class="hero__stats">
                     <div class="hero__stat">
                         <span class="hero__stat-value">99.98%</span>
                         <span class="hero__stat-label">SLA доступности CRS</span>
                     </div>
                     <div class="hero__stat">
-                        <span class="hero__stat-value">< 50ms</span>
+                        <span class="hero__stat-value">&lt; 50ms</span>
                         <span class="hero__stat-label">Латентность API ядра</span>
                     </div>
                     <div class="hero__stat">
                         <span class="hero__stat-value">20+</span>
-                        <span class="hero__stat-label">Промежуточных пристаней на маршруте</span>
+                        <span class="hero__stat-label">Пристаней на маршруте</span>
                     </div>
                     <div class="hero__stat">
                         <span class="hero__stat-value">100%</span>
@@ -514,95 +205,44 @@
                     </div>
                 </div>
             </div>
-            <div class="hero__mockup reveal reveal-delay-1" role="img" aria-label="Интерактивная панель управления флотом: вкладки Passenger RMS и Cargo Manifest">
+            <div class="hero__mockup">
                 <div class="mockup__header">
-                    <div class="mockup__dots" aria-hidden="true"><span class="mockup__dot"></span><span class="mockup__dot"></span><span class="mockup__dot"></span></div>
+                    <div class="mockup__dots"><span class="mockup__dot"></span><span class="mockup__dot"></span><span class="mockup__dot"></span></div>
                     <span class="mockup__title">SVTR Fleet Control Terminal v3.4.1</span>
-                    <span style="width: 36px;"></span>
                 </div>
-                <div class="mockup__tabs" role="tablist" aria-label="Режимы терминала">
-                    <button class="mockup__tab active" role="tab" aria-selected="true" aria-controls="panel-pax" id="tab-pax" data-tab="pax">Пассажирский RMS / CRS</button>
-                    <button class="mockup__tab" role="tab" aria-selected="false" aria-controls="panel-cargo" id="tab-cargo" data-tab="cargo">Грузовой манифест / ЭТрН</button>
+                <div class="mockup__tabs">
+                    <div class="mockup__tab active">Пассажирский RMS / CRS</div>
+                    <div class="mockup__tab">Грузовой манифест / ЭТрН</div>
                 </div>
-                <div class="mockup__panel active" id="panel-pax" role="tabpanel" aria-labelledby="tab-pax">
+                <div class="mockup__panel">
                     <div class="rms-grid">
                         <div class="rms-card">
                             <div class="rms-card__head">
-                                <span class="rms-card__title">Нестинг классов бронирования (RBD)</span>
+                                <span class="rms-card__title">Нестинг классов (RBD)</span>
                                 <span class="rms-card__badge">Serial & Parallel</span>
                             </div>
-                            <div class="nesting-table" role="table" aria-label="Иерархия классов бронирования">
+                            <div class="nesting-table">
                                 <div class="nesting-row"><span class="nesting-class">Y (Full Fare)</span><span class="nesting-avail">Avail: 42</span></div>
                                 <div class="nesting-row"><span class="nesting-class">B (Business)</span><span class="nesting-avail">Avail: 38</span></div>
                                 <div class="nesting-row"><span class="nesting-class">M (Standard+)</span><span class="nesting-avail">Avail: 35</span></div>
                                 <div class="nesting-row"><span class="nesting-class">H (Standard)</span><span class="nesting-avail">Avail: 30</span></div>
                                 <div class="nesting-row"><span class="nesting-class">Q (Promo)</span><span class="nesting-avail">Avail: 22</span></div>
-                                <div class="nesting-row"><span class="nesting-class">V (Deep Discount)</span><span class="nesting-nested">Closed by Nesting</span></div>
+                                <div class="nesting-row"><span class="nesting-class">V (Deep Discount)</span><span class="nesting-nested">Closed</span></div>
                             </div>
-                            <div class="nesting-bar" title="Загрузка Y/B/M"><div class="nesting-bar__fill" style="width: 78%;"></div></div>
-                            <small style="color:var(--text-muted);font-family:var(--font-mono);font-size:0.7rem;display:block;margin-top:0.5rem;">Y/B/M вложены: продажа Y уменьшает квоты B, M</small>
+                            <div class="nesting-bar"><div class="nesting-bar__fill" style="width: 78%;"></div></div>
                         </div>
                         <div class="rms-card">
                             <div class="rms-card__head">
                                 <span class="rms-card__title">Управляемый овербукинг</span>
-                                <span class="rms-card__badge rms-card__badge--amber">Overbooking Active</span>
+                                <span class="rms-card__badge" style="color:var(--accent-amber);border-color:rgba(245,158,11,0.3)">Active</span>
                             </div>
-                            <div class="overbooking-info">
-                                <div class="ob-item"><span class="ob-item__label">Базовый No-Show Rate (рейс №442)</span><span class="ob-item__value">4.2%</span></div>
-                                <div class="ob-item"><span class="ob-item__label">Расчетный безопасный лимит</span><span class="ob-item__value">+3 места (CI 95%)</span></div>
-                                <div class="ob-item"><span class="ob-item__label">Текущая сверхпродажа</span><span class="ob-item__value" style="color:var(--accent-amber);">+2 / +3</span></div>
-                                <div class="ob-item"><span class="ob-item__label">Авто-блок при достижении лимита</span><span class="ob-item__value" style="color:var(--accent-green);">Enabled</span></div>
+                            <div style="font-size: 0.8125rem; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
+                                <div>No-Show Rate: <strong>4.2%</strong></div>
+                                <div>Лимит: <strong>+3 места (CI 95%)</strong></div>
+                                <div>Текущая сверхпродажа: <strong style="color:var(--accent-amber);">+2 / +3</strong></div>
+                                <div>Авто-блок: <strong style="color:var(--accent-green);">Включен</strong></div>
                             </div>
-                            <div class="nesting-bar" style="margin-top:1rem;"><div class="nesting-bar__fill nesting-bar__fill--amber" style="width: 66%;"></div></div>
-                            <small style="color:var(--text-muted);font-family:var(--font-mono);font-size:0.7rem;display:block;margin-top:0.5rem;">Лимит рассчитан по модели Биномиального распределения на истории 12 месяцев</small>
-                        </div>
-                        <div class="rms-card" style="grid-column: 1 / -1;">
-                            <div class="rms-card__head">
-                                <span class="rms-card__title">По-сегментная загрузка салона (Маршрут: Северодвинск → Архангельск, 12 пристаней)</span>
-                                <span class="rms-card__badge">Multi-leg Inventory</span>
-                            </div>
-                            <div class="segment-map" role="img" aria-label="Визуализация по-сегментной продажи мест на маршруте с 12 пристанями">
-                                <div class="segment-row"><span class="segment-port">Северодвинск</span><div class="segment-leg"><div class="segment-leg__block segment-leg__block--sold" style="width: 40%; left: 0%;" title="Продано: Сегменты 1-4"></div><div class="segment-leg__block segment-leg__block--free" style="width: 60%; left: 40%;"></div></div></div>
-                                <div class="segment-row"><span class="segment-port">Кемь</span><div class="segment-leg"><div class="segment-leg__block segment-leg__block--sold" style="width: 25%; left: 0%;" title="Продано: Сегменты 2-3"></div><div class="segment-leg__block segment-leg__block--nested" style="width: 15%; left: 25%;" title="Квота под нестинг"></div><div class="segment-leg__block segment-leg__block--free" style="width: 60%; left: 40%;"></div></div></div>
-                                <div class="segment-row"><span class="segment-port">Нижняя Тойма</span><div class="segment-leg"><div class="segment-leg__block segment-leg__block--quota" style="width: 20%; left: 0%;" title="Агентская квота Туроператора"></div><div class="segment-leg__block segment-leg__block--free" style="width: 80%; left: 20%;"></div></div></div>
-                                <div class="segment-row"><span class="segment-port">... (8 портов) ...</span><div class="segment-leg"><div class="segment-leg__block segment-leg__block--free" style="width: 100%;"></div></div></div>
-                                <div class="segment-row"><span class="segment-port">Архангельск</span><div class="segment-leg"><div class="segment-leg__block segment-leg__block--free" style="width: 100%;"></div></div></div>
-                            </div>
-                            <p style="margin-top:1rem;font-size:0.8125rem;color:var(--text-secondary);font-family:var(--font-mono);">Логика: место/каюта автоматически возвращается в пул после высадки пассажира и доступно для продажи на следующих плечах маршрута. Рассинхронизация исключена архитектурой Hosted CRS.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="mockup__panel" id="panel-cargo" role="tabpanel" aria-labelledby="tab-cargo" hidden>
-                    <div class="cargo-grid">
-                        <div class="cargo-ship">
-                            <div class="ship-schema">
-                                <div class="ship-deck" role="img" aria-label="Палубная загрузка Ro-Ro: 3 слота, загрузка 75%, 45%, 90%">
-                                    <div class="ship-deck__slot" data-load="75%"><div class="ship-deck__fill" style="height: 75%;"></div></div>
-                                    <div class="ship-deck__slot" data-load="45%"><div class="ship-deck__fill" style="height: 45%;"></div></div>
-                                    <div class="ship-deck__slot" data-load="90%"><div class="ship-deck__fill" style="height: 90%;"></div></div>
-                                </div>
-                                <div class="ship-holds">
-                                    <div class="ship-hold" data-name="Трюм №1 (Грузовики)">
-                                        <div class="hold-fill" style="--fill: 85"><span class="hold-fill__val">85%</span></div>
-                                        <div class="hold-meta">Deadweight: 420/500 т<br>TEU: 12/15</div>
-                                    </div>
-                                    <div class="ship-hold" data-name="Трюм №2 (Контейнеры)">
-                                        <div class="hold-fill" style="--fill: 60"><span class="hold-fill__val">60%</span></div>
-                                        <div class="hold-meta">Volume: 1,200/2,000 m³<br>TEU: 45/75</div>
-                                    </div>
-                                    <div class="ship-hold" data-name="Трюм №3 (Навал)"><div class="hold-fill" style="--fill: 30"><span class="hold-fill__val">30%</span></div><div class="hold-meta">Area: 150/500 m²<br>Project Cargo</div></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cargo-list">
-                            <div class="cargo-list__header"><span>Груз / Накладная</span><span>Тип</span><span>Статус ЭТрН</span><span>ГИС ЭПД</span></div>
-                            <div class="cargo-list__body">
-                                <div class="cargo-row"><span class="cargo-row__name">Строительная техника (Экскаваторы)</span><span class="cargo-row__type">Ro-Ro / 45 т</span><span class="cargo-row__status status-signed"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>Подписано УКЭП</span><span class="cargo-row__gis">Зарегистрировано (ID: 773...)</span></div>
-                                <div class="cargo-row"><span class="cargo-row__name">Контейнеры 20ft (Партия №44)</span><span class="cargo-row__type">TEU x 24</span><span class="cargo-row__status status-pending"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>Ожидает подписи грузовладельца</span><span class="cargo-row__gis">Черновик</span></div>
-                                <div class="cargo-row"><span class="cargo-row__name">Металлопрокат (Погонные метры)</span><span class="cargo-row__type">General Cargo / 120 м</span><span class="cargo-row__status status-signed"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>Подписано УКЭП</span><span class="cargo-row__gis">Зарегистрировано (ID: 773...)</span></div>
-                                <div class="cargo-row"><span class="cargo-row__name">Опасные грузы (Класс 3)</span><span class="cargo-row__type">Tank / 15 т</span><span class="cargo-row__status status-error"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>Ошибка валидации ХМЛ</span><span class="cargo-row__gis">Отклонено ИС ЭПД</span></div>
-                                <div class="cargo-row"><span class="cargo-row__name">Пассажирские авто (Ro-Pax)</span><span class="cargo-row__type">Ro-Ro / 12 ед.</span><span class="cargo-row__status status-draft"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>Черновик экспедитора</span><span class="cargo-row__gis">—</span></div>
-                            </div>
+                            <div class="nesting-bar" style="margin-top:1.5rem;"><div class="nesting-bar__fill" style="width: 66%; background: var(--accent-amber);"></div></div>
                         </div>
                     </div>
                 </div>
@@ -610,1045 +250,255 @@
         </div>
     </section>
 
-    <!-- ============================================================
-         PRODUCTS SECTION
-         ============================================================ -->
-    <section id="products" class="section products" aria-labelledby="products-title">
+    <section id="products" class="section products">
         <div class="container">
-            <header class="section-header reveal">
+            <div class="section-header">
                 <span class="tag">Продуктовая экосистема</span>
-                <h2 id="products-title" class="section-title">Четыре взаимосвязанных программных контура для полного цикла управления флотом</h2>
+                <h2 class="section-title">Четыре взаимосвязанных программных контура</h2>
                 <p class="section-subtitle">Каждый модуль — самостоятельный микросервис с открытым API, работающий в едином транзакционном контуре Hosted CRS.</p>
-            </header>
-            <div class="products__grid" role="list">
-                <!-- Product 1 -->
-                <article class="product-card reveal" style="--accent-color: #0066ff; --icon-bg: rgba(0,102,255,0.1);" role="listitem">
-                    <div class="product-card__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
-                    <h3 class="product-card__title">Технология электронного билета (E-Ticketing)</h3>
-                    <p class="product-card__desc">Омниканальная дистрибуция через единый API-шлюз: веб-сайт пароходства, мобильные приложения, портовые кассы, терминалы самообслуживания, федеральные OTA-агрегаторы и туроператоры.</p>
-                    <ul class="product-card__features">
-                        <li>Поддержка сложных маршрутов с неограниченным числом плечей</li>
-                        <li>Автоматизированная обработка багажных квитанций и спец. багажа</li>
-                        <li>Льготные категории (ЕСПБ, ВПД, региональные карты) с автоверификацией</li>
-                        <li>Офлайн-синхронизация списков посадки на борту (PWA/IndexedDB) в зонах без связи</li>
-                        <li>Интеграция с АЦБПДП Минтранса в реальном времени (XML/JSON over TLS)</li>
-                    </ul>
-                </article>
-                <!-- Product 2 -->
-                <article class="product-card reveal reveal-delay-1" style="--accent-color: #00d2ff; --icon-bg: rgba(0,210,255,0.1);" role="listitem">
-                    <div class="product-card__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><cylinder cx="12" cy="5" r="8" h="2" /><path d="M4 5v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5" /><ellipse cx="12" cy="19" rx="8" ry="2" /></svg></div>
-                    <h3 class="product-card__title">Централизованное хранение ресурса (Hosted CRS)</h3>
-                    <p class="product-card__desc">Единый инвентарь всех судов на отказоустойчивых серверах СВТР (ЦОД Tier III). Исключение рассинхронизации и двойных продаж за счет ACID-транзакций и блокировок на уровне строк БД.</p>
-                    <ul class="product-card__features">
-                        <li><strong>По-сегментная продажа:</strong> одно место/каюта продается повторно на разных плечах маршрута (до 20+ пристаней)</li>
-                        <li><strong>Динамические агентские квоты:</strong> жесткие/мягкие блоки с таймером авто-возврата в общий пул</li>
-                        <li><strong>Интерактивные схемы судов:</strong> по-палубная детализация (СПК «Метеоры», «Валдаи», водоизмещающий флот, паромы, круизные теплоходы)</li>
-                        <li>Поддержка каютных планов любой сложности (люксы, полулюксы, места в купе, плацкарт, сидячие)</li>
-                        <li>Репликация в горячем резерве (Active-Active) с RPO=0, RTO&lt;30 сек</li>
-                    </ul>
-                </article>
-                <!-- Product 3 -->
-                <article class="product-card reveal reveal-delay-2" style="--accent-color: #f59e0b; --icon-bg: rgba(245,158,11,0.1);" role="listitem">
-                    <div class="product-card__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></div>
-                    <h3 class="product-card__title">Управление доходностью (Revenue Management / RMS)</h3>
-                    <p class="product-card__desc">Математически строгая система максимизации выручки на рейсе. Реализация Serial &amp; Parallel Nesting, динамических триггеров и контролируемого овербукинга на базе статистических моделей.</p>
-                    <ul class="product-card__features">
-                        <li><strong>Нестинг (Nesting):</strong> вложенное квотирование — высокомаржинальные RBD забирают ресурс низких классов при росте спроса</li>
-                        <li><strong>Овербукинг:</strong> расчет лимита сверхпродажи по модели No-Show (биномиальное/пуассоновское распределение) с доверительным интервалом 95%</li>
-                        <li><strong>Динамические триггеры:</strong> пересчет тарифов по глубине продаж (Days Before Departure), загрузке судна, календарю, метеоусловиям</li>
-                        <li>Управление фаре-классами (RBD), тарифами, правилами тарификации (FP/RP) через админку</li>
-                        <li>А/Б тестирование ценовых стратегий на кластерах судов/маршрутов</li>
-                    </ul>
-                </article>
-                <!-- Product 4 -->
-                <article class="product-card reveal reveal-delay-3" style="--accent-color: #10b981; --icon-bg: rgba(16,185,129,0.1);" role="listitem">
-                    <div class="product-card__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg></div>
-                    <h3 class="product-card__title">Грузовая система с ЭТрН (Cargo &amp; eGN)</h3>
-                    <p class="product-card__desc">Бронирование грузового ресурса флота и паромов с формированием юридически значимой Электронной транспортной накладной (ЭТрН) и интеграцией с ГИС ЭПД через аккредитованных операторов.</p>
-                    <ul class="product-card__features">
-                        <li>Учет дедвейта, кубатуры трюмов, палубной площади, контейнерных слотов (TEU), погонных метров (Ro-Ro)</li>
-                        <li>Формирование и подписание ЭТрН / электронных коносаментов УКЭП (КриптоПро / VipNet)</li>
-                        <li>ЛК грузовладельца/экспедитора: онлайн-расчет фрахта, трекинг, документооборот</li>
-                        <li>Бесшовная выгрузка первички в 1С:ERP (JSON/REST, EnterpriseData)</li>
-                        <li>Интеграция с ГИС ЭПД (ФНС/Минтранс) через операторов ИС ЭПД (СБИС, Диадок, Контур и др.)</li>
-                    </ul>
-                </article>
             </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-         ARCHITECTURE SECTION
-         ============================================================ -->
-    <section id="architecture" class="section architecture" aria-labelledby="arch-title">
-        <div class="container">
-            <header class="section-header reveal">
-                <span class="tag">Системная архитектура</span>
-                <h2 id="arch-title" class="section-title">Трехуровневая отказоустойчивая архитектура с открытым API-шлюзом</h2>
-                <p class="section-subtitle">Разделение ответственности: каналы продаж не знают о внутренней логике CRS, CRS не знает о протоколах госсистем. Интеграция только через контракты API.</p>
-            </header>
-            <div class="reveal reveal-delay-1" style="overflow-x:auto; max-width:100%;">
-                <svg class="arch__svg" viewBox="0 0 1200 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Схема архитектуры: 3 уровня - Каналы продаж, Ядро СВТР, Внешние системы">
-                    <defs>
-                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#00d2ff" opacity="0.6"/>
-                        </marker>
-                        <marker id="arrowhead-rev" markerWidth="10" markerHeight="7" refX="1" refY="3.5" orient="auto">
-                            <polygon points="10 0, 0 3.5, 10 7" fill="#00d2ff" opacity="0.6"/>
-                        </marker>
-                        <linearGradient id="gradBlue" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#0066ff"/><stop offset="100%" stop-color="#0044aa"/></linearGradient>
-                        <linearGradient id="gradCyan" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#00d2ff"/><stop offset="100%" stop-color="#0099cc"/></linearGradient>
-                        <linearGradient id="gradAmber" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#d97706"/></linearGradient>
-                        <linearGradient id="gradGreen" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#10b981"/><stop offset="100%" stop-color="#059669"/></linearGradient>
-                        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                    </defs>
-                    
-                    <!-- Background Layers -->
-                    <rect x="20" y="20" width="1160" height="140" rx="16" fill="#0a1a33" stroke="#1d2f4a" stroke-width="1"/>
-                    <text x="600" y="50" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="#5e728a" letter-spacing="0.1em">УРОВЕНЬ 1: КАНАЛЫ ПРОДАЖ И B2B-ПОРТАЛЫ (API CONSUMERS)</text>
-                    
-                    <rect x="20" y="190" width="1160" height="200" rx="16" fill="#0a1a33" stroke="#0066ff" stroke-width="1.5" opacity="0.3"/>
-                    <text x="600" y="220" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="#00d2ff" letter-spacing="0.1em">УРОВЕНЬ 2: ЦЕНТРАЛЬНОЕ СЕРВЕРНОЕ ЯДРО СВТР (CORE PLATFORM)</text>
-
-                    <rect x="20" y="420" width="1160" height="80" rx="16" fill="#0a1a33" stroke="#1d2f4a" stroke-width="1"/>
-                    <text x="600" y="450" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="#5e728a" letter-spacing="0.1em">УРОВЕНЬ 3: ГОССИСТЕМЫ, ERP И СУДОВАЯ ДИСПЕТЧЕРСКАЯ (EXTERNAL INTEGRATIONS)</text>
-
-                    <!-- Level 1 Boxes -->
-                    <g class="arch-box" style="cursor:default;">
-                        <rect x="50" y="45" width="220" height="90" rx="10" fill="#112240" stroke="#1d2f4a" filter="url(#glow)"/>
-                        <text x="160" y="80" text-anchor="middle" font-family="Inter" font-weight="600" font-size="14" fill="#e8f0fa">Веб-сайт / Моб. приложение</text>
-                        <text x="160" y="102" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="#94a3b8">REST / GraphQL API</text>
-                    </g>
-                    <g class="arch-box">
-                        <rect x="310" y="45" width="220" height="90" rx="10" fill="#112240" stroke="#1d2f4a"/>
-                        <text x="420" y="80" text-anchor="middle" font-family="Inter" font-weight="600" font-size="14" fill="#e8f0fa">Портовые кассы / Терминалы</text>
-                        <text x="420" y="102" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="#94a3b8">Offline-first Sync</text>
-                    </g>
-                    <g class="arch-box">
-                        <rect x="570" y="45" width="220" height="90" rx="10" fill="#112240" stroke="#1d2f4a"/>
-                        <text x="680" y="80" text-anchor="middle" font-family="Inter" font-weight="600" font-size="14" fill="#e8f0fa">OTA / Туроператоры (B2B)</text>
-                        <text x="680" y="102" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="#94a3b8">Agent API / Quotas</text>
-                    </g>
-                    <g class="arch-box">
-                        <rect x="830" y="45" width="220" height="90" rx="10" fill="#112240" stroke="#1d2f4a"/>
-                        <text x="940" y="80" text-anchor="middle" font-family="Inter" font-weight="600" font-size="14" fill="#e8f0fa">Грузовые порталы / 1С</text>
-                        <text x="940" y="102" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="#94a3b8">Cargo API / EDI</text>
-                    </g>
-
-                    <!-- Level 2 Core Boxes -->
-                    <!-- API Gateway -->
-                    <g class="arch-box core" transform="translate(50, 230)">
-                        <rect x="0" y="0" width="220" height="140" rx="10" fill="#0e1e33" stroke="#0066ff" stroke-width="1.5"/>
-                        <text x="110" y="35" text-anchor="middle" font-family="Inter" font-weight="700" font-size="13" fill="#00d2ff">API Gateway (Kong/Traefik)</text>
-                        <text x="110" y="55" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="#5e728a">mTLS / Rate Limit / JWT</text>
-                        <line x1="20" y1="70" x2="200" y2="70" stroke="#1d2f4a"/>
-                        <text x="110" y="95" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="#94a3b8">Единая точка входа</text>
-                        <text x="110" y="115" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="#94a3b8">OpenAPI 3.1 Spec</text>
-                    </g>
-
-                    <!-- CRS Cluster -->
-                    <g class="arch-box core" transform="translate(300, 230)">
-                        <rect x="0" y="0" width="280" height="140" rx="10" fill="#0e1e33" stroke="#00d2ff" stroke-width="1.5"/>
-                        <text x="140" y="35" text-anchor="middle" font-family="Inter" font-weight="700" font-size="13" fill="#00d2ff">Hosted CRS Cluster (PostgreSQL Patroni)</text>
-                        <line x1="20" y1="50" x2="260" y2="50" stroke="#1d2f4a"/>
-                        <text x="140" y="75" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="#94a3b8">Inventory Engine (Multi-leg)</text>
-                        <text x="140" y="95" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="#94a3b8">Booking Kernel (ACID)</text>
-                        <text x="140" y="115" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="#94a3b8">Waitlist / Queue Manager</text>
-                    </g>
-
-                    <!-- RMS Engine -->
-                    <g class="arch-box core" transform="translate(620, 230)">
-                        <rect x="0" y="0" width="260" height="140" rx="10" fill="#0e1e33" stroke="#f59e0b" stroke-width="1.5"/>
-                        <text x="130" y="35" text-anchor="middle" font-family="Inter" font-weight="700" font-size="13" fill="#f59e0b">RMS Engine (Python/Go Microservices)</text>
-                        <line x1="20" y1="50" x2="240" y2="50" stroke="#1d2f4a"/>
-                        <text x="130" y="75" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="#94a3b8">Nesting Calculator (Serial/Parallel)</text>
-                        <text x="130" y="95" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="#94a3b8">Overbooking Optimizer (Stat Models)</text>
-                        <text x="130" y="115" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="#94a3b8">Dynamic Pricing Triggers</text>
-                    </g>
-
-                    <!-- Cargo Engine -->
-                    <g class="arch-box core" transform="translate(920, 230)">
-                        <rect x="0" y="0" width="240" height="140" rx="10" fill="#0e1e33" stroke="#10b981" stroke-width="1.5"/>
-                        <text x="120" y="35" text-anchor="middle" font-family="Inter" font-weight="700" font-size="13" fill="#10b981">Cargo Engine &amp; ETRN Module</text>
-                        <line x1="20" y1="50" x2="220" y2="50" stroke="#1d2f4a"/>
-                        <text x="120" y="75" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="#94a3b8">Hold/Deck Planning (3D Bin Packing)</text>
-                        <text x="120" y="95" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="#94a3b8">ETRN Generator (XML Schema v5.01)</text>
-                        <text x="120" y="115" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="#94a3b8">UKES Signing (CryptoPro/JCP)</text>
-                    </g>
-
-                    <!-- Connections L1 -> L2 -->
-                    <path d="M160 160 V 230" stroke="#00d2ff" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.5" marker-end="url(#arrowhead)"/>
-                    <path d="M420 160 V 230" stroke="#00d2ff" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.5" marker-end="url(#arrowhead)"/>
-                    <path d="M680 160 V 230" stroke="#00d2ff" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.5" marker-end="url(#arrowhead)"/>
-                    <path d="M940 160 V 230" stroke="#00d2ff" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.5" marker-end="url(#arrowhead)"/>
-
-                    <!-- Internal Core Connections (Bus) -->
-                    <path d="M270 300 H 300" stroke="#00d2ff" stroke-width="2" opacity="0.6" marker-end="url(#arrowhead)"/>
-                    <path d="M580 300 H 620" stroke="#f59e0b" stroke-width="2" opacity="0.6" marker-end="url(#arrowhead)"/>
-                    <path d="M880 300 H 920" stroke="#10b981" stroke-width="2" opacity="0.6" marker-end="url(#arrowhead)"/>
-                    <!-- Event Bus Line -->
-                    <line x1="270" y1="340" x2="1160" y2="340" stroke="#00d2ff" stroke-width="2" stroke-dasharray="8 4" opacity="0.3"/>
-                    <text x="700" y="335" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="#5e728a">Internal Event Bus (Kafka / NATS) — Event Sourcing / CQRS</text>
-
-                    <!-- Level 3 Boxes -->
-                    <g class="arch-box" transform="translate(80, 435)">
-                        <rect x="0" y="0" width="240" height="50" rx="8" fill="#112240" stroke="#1d2f4a"/>
-                        <text x="120" y="30" text-anchor="middle" font-family="Inter" font-weight="500" font-size="12" fill="#e8f0fa">АЦБПДП Минтранса РФ</text>
-                    </g>
-                    <g class="arch-box" transform="translate(350, 435)">
-                        <rect x="0" y="0" width="240" height="50" rx="8" fill="#112240" stroke="#1d2f4a"/>
-                        <text x="120" y="30" text-anchor="middle" font-family="Inter" font-weight="500" font-size="12" fill="#e8f0fa">ГИС ЭПД (Операторы ИС)</text>
-                    </g>
-                    <g class="arch-box" transform="translate(620, 435)">
-                        <rect x="0" y="0" width="240" height="50" rx="8" fill="#112240" stroke="#1d2f4a"/>
-                        <text x="120" y="30" text-anchor="middle" font-family="Inter" font-weight="500" font-size="12" fill="#e8f0fa">54-ФЗ (ОФД) / 152-ФЗ / ЕСПБ</text>
-                    </g>
-                    <g class="arch-box" transform="translate(890, 435)">
-                        <rect x="0" y="0" width="240" height="50" rx="8" fill="#112240" stroke="#1d2f4a"/>
-                        <text x="120" y="30" text-anchor="middle" font-family="Inter" font-weight="500" font-size="12" fill="#e8f0fa">1С:ERP / Судовая диспетчерская</text>
-                    </g>
-
-                    <!-- Connections L2 -> L3 -->
-                    <path d="M200 370 V 435" stroke="#00d2ff" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.5" marker-end="url(#arrowhead)"/>
-                    <path d="M470 370 V 435" stroke="#00d2ff" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.5" marker-end="url(#arrowhead)"/>
-                    <path d="M740 370 V 435" stroke="#00d2ff" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.5" marker-end="url(#arrowhead)"/>
-                    <path d="M1010 370 V 435" stroke="#00d2ff" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.5" marker-end="url(#arrowhead)"/>
-                </svg>
-            </div>
-            <div class="arch__legend reveal reveal-delay-2">
-                <div class="arch__legend-item"><span class="arch__legend-dot" style="background: linear-gradient(135deg, #0066ff, #00d2ff);"></span> Пассажирский контур (CRS/RMS)</div>
-                <div class="arch__legend-item"><span class="arch__legend-dot" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);"></span> Грузовой контур (Cargo/ETRN)</div>
-                <div class="arch__legend-item"><span class="arch__legend-dot" style="background: linear-gradient(135deg, #10b981, #34d399);"></span> Интеграционные шины / Госсистемы</div>
-                <div class="arch__legend-item"><span class="arch__legend-dot" style="background: #1d2f4a; border: 1px solid #2d4060;"></span> Внешние каналы потребления API</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-         RMS DEEP DIVE & CALCULATOR
-         ============================================================ -->
-    <section id="rms-deep" class="section rms-deep" aria-labelledby="rms-title">
-        <div class="container">
-            <header class="section-header left reveal">
-                <span class="tag">Глубокая математика RMS / CRS</span>
-                <h2 id="rms-title" class="section-title">Алгоритмическое преимущество: от эвристик к математически обоснованным решениям</h2>
-                <p class="section-subtitle">Мы не используем «экспертные оценки». Каждый параметр овербукинга, каждый триггер открытия класса — результат работы статистических моделей на исторических данных вашего пароходства.</p>
-            </header>
-            <div class="rms-deep__grid">
-                <div class="rms-theory">
-                    <article class="theory-card reveal">
-                        <h3 class="theory-card__title"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg> Serial &amp; Parallel Nesting</h3>
-                        <ul class="theory-list">
-                            <li><strong>Serial Nesting:</strong> Иерархия классов Y → B → M → H → Q → V. Продажа в Y автоматически уменьшает доступность во всех нижестоящих классах. Гарантирует защиту высокой маржи.</li>
-                            <li><strong>Parallel Nesting:</strong> Независимые пулы для разных сегментов спроса (например, «Раннее бронирование» vs «Корпоративные тарифы») с возможностью перераспределения остатков по правилам.</li>
-                            <li><strong>Bid Price Control:</strong> Динамическое пороговое значение (Bid Price) для каждого класса, рассчитываемое через DP (Dynamic Programming) или эвристику EMSR-b, обновляется при каждом запросе доступности.</li>
-                        </ul>
-                        <pre class="formula-box" aria-label="Формула расчета Bid Price"><code>BidPrice<sub>k</sub> = E[Revenue | Accept Request<sub>k</sub>] - E[Revenue | Reject Request<sub>k</sub>]
-ΔV = V(t, x - e<sub>k</sub>) - V(t, x)
-Открытие класса k ⇔ Fare<sub>k</sub> ≥ BidPrice<sub>k</sub>(t, x)</code></pre>
-                    </article>
-                    <article class="theory-card reveal reveal-delay-1">
-                        <h3 class="theory-card__title"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg> Управляемый овербукинг (Controlled Overbooking)</h3>
-                        <ul class="theory-list">
-                            <li>Моделирование No-Show как Бернуллиевского процесса с параметром <code>p</code>, оцениваемым по скользящему окну (последние 50 рейсов данного маршрута/дня недели/судна).</li>
-                            <li>Расчет оптимального лимита <code>L*</code> минимизирующего функцию потерь: <code>Cost(Bumping) * P(Show > Cap) + Cost(Spoilage) * P(Show < Cap)</code>.</li>
-                            <li>Автоматическое закрытие продаж при достижении <code>Booked = Capacity + L*</code>. Алерты диспетчеру при приближении к лимиту.</li>
-                        </ul>
-                        <pre class="formula-box" aria-label="Формула оптимального овербукинга"><code>L* = argmax<sub>L</sub> Σ [P(NS = k) * (Revenue<sub>L</sub> - Penalty<sub>max(0, k-L)</sub>)]
-P(NS=k) ~ Binomial(n=Booked, p=NoShowRate)
-CI 95%: p̂ ± 1.96 * √(p̂(1-p̂)/n)</code></pre>
-                    </article>
-                    <article class="theory-card reveal reveal-delay-2">
-                        <h3 class="theory-card__title"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg> Мультисегментный инвентарь (Multi-leg)</h3>
-                        <ul class="theory-list">
-                            <li>Ресурс (место/каюта) моделируется как временной интервал на графе маршрута.</li>
-                            <li>Запрос доступности (Avail) решается как задача поиска пути в графе с ограничениями емкости (Max-Flow / Min-Cut на DAG).</li>
-                            <li>Автоматическое освобождение ресурса при высадке (Check-out event) и мгновенная доступность для продажи на_downstream_плечах.</li>
-                        </ul>
-                    </article>
+            <div class="products__grid">
+                <div class="product-card">
+                    <h3 class="product-card__title">E-Ticketing</h3>
+                    <p class="product-card__desc">Омниканальная дистрибуция через единый API-шлюз: веб-сайт пароходства, мобильные приложения, портовые кассы, терминалы самообслуживания, OTA-агрегаторы.</p>
+                    <ul class="product-card__features">
+                        <li>Сложные маршруты с неограниченным числом плечей</li>
+                        <li>Офлайн-синхронизация посадки на борту (PWA)</li>
+                        <li>Интеграция с АЦБПДП Минтранса в реальном времени</li>
+                    </ul>
                 </div>
-                <aside class="calculator reveal reveal-delay-3" aria-label="Калькулятор экономического эффекта">
-                    <h3 class="calc__title">Калькулятор экономического эффекта</h3>
-                    <p class="calc__subtitle">Оцените прирост выручки от внедрения Nesting, Overbooking и ЭТрН. Параметры калиброваны под типичное речное пароходство.</p>
-                    <form id="calcForm" onsubmit="return false;">
-                        <div class="calc__input-group">
-                            <div class="calc__label-row"><span class="calc__label">Размер флота (судов в линии)</span><span class="calc__value" id="val-fleet">5</span></div>
-                            <input type="range" class="calc__slider" id="inp-fleet" min="1" max="50" value="5" aria-label="Количество судов">
-                        </div>
-                        <div class="calc__input-group">
-                            <div class="calc__label-row"><span class="calc__label">Пассажиропоток в год (тыс. чел.)</span><span class="calc__value" id="val-pax">150</span></div>
-                            <input type="range" class="calc__slider" id="inp-pax" min="50" max="2000" value="150" step="10" aria-label="Пассажиропоток в тысячах">
-                        </div>
-                        <div class="calc__input-group">
-                            <div class="calc__label-row"><span class="calc__label">Грузооборот в год (тыс. т)</span><span class="calc__value" id="val-cargo">80</span></div>
-                            <input type="range" class="calc__slider" id="inp-cargo" min="10" max="1000" value="80" step="5" aria-label="Грузооборот в тысячах тонн">
-                        </div>
-                        <div class="calc__input-group">
-                            <div class="calc__label-row"><span class="calc__label">Средний чек пасс. (руб.)</span><span class="calc__value" id="val-ticket">2500</span></div>
-                            <input type="range" class="calc__slider" id="inp-ticket" min="500" max="15000" value="2500" step="500" aria-label="Средний чек пассажира">
-                        </div>
-                        <div class="calc__input-group">
-                            <div class="calc__label-row"><span class="calc__label">Средний фрахт (руб./т)</span><span class="calc__value" id="val-freight">1200</span></div>
-                            <input type="range" class="calc__slider" id="inp-freight" min="500" max="5000" value="1200" step="100" aria-label="Средний фрахт">
-                        </div>
-                        <div class="calc__results" aria-live="polite">
-                            <div class="calc__result-item">
-                                <div class="calc__result-label">Прирост от Nesting / Overbooking (Пасс.)</div>
-                                <div class="calc__result-value calc__result-value--accent" id="res-pax">+12.4 М ₽</div>
-                            </div>
-                            <div class="calc__result-item">
-                                <div class="calc__result-label">Экономия на документообороте (ЭТрН)</div>
-                                <div class="calc__result-value" id="res-cargo">+3.2 М ₽</div>
-                            </div>
-                            <div class="calc__result-item">
-                                <div class="calc__result-label">Сокращение потерь от No-Show</div>
-                                <div class="calc__result-value" id="res-noshow">+5.1 М ₽</div>
-                            </div>
-                            <div class="calc__result-item">
-                                <div class="calc__result-label">ROI за 1 год (при CAPEX SaaS)</div>
-                                <div class="calc__result-value" id="res-roi">340%</div>
-                            </div>
-                            <div class="calc__result-item calc__total">
-                                <div class="calc__result-label">Совокупный годовой эффект</div>
-                                <div class="calc__result-value" id="res-total">+20.7 М ₽</div>
-                            </div>
-                        </div>
-                    </form>
-                </aside>
+                <div class="product-card">
+                    <h3 class="product-card__title">Hosted CRS</h3>
+                    <p class="product-card__desc">Единый инвентарь всех судов на отказоустойчивых серверах СВТР (ЦОД Tier III). Исключение рассинхронизации и оверсейла через ACID-блокировки.</p>
+                    <ul class="product-card__features">
+                        <li>По-сегментная продажа одного места на разных плечах</li>
+                        <li>Динамические жесткие и мягкие агентские квоты</li>
+                        <li>Интерактивные схемы судов с палубами и каютами</li>
+                    </ul>
+                </div>
+                <div class="product-card">
+                    <h3 class="product-card__title">Revenue Management (RMS)</h3>
+                    <p class="product-card__desc">Математическая система максимизации выручки на рейсе. Реализация Serial & Parallel Nesting, динамических триггеров и контролируемого овербукинга.</p>
+                    <ul class="product-card__features">
+                        <li>Вложенное квотирование RBD-классов</li>
+                        <li>Овербукинг на базе распределения No-Show (CI 95%)</li>
+                        <li>Динамический пересчет тарифов по глубине продаж</li>
+                    </ul>
+                </div>
+                <div class="product-card">
+                    <h3 class="product-card__title">Грузовая система & ЭТрН</h3>
+                    <p class="product-card__desc">Бронирование грузового ресурса флота и паромов с формированием юридически значимой ЭТрН и интеграцией с ГИС ЭПД через операторов.</p>
+                    <ul class="product-card__features">
+                        <li>Учет дедвейта, кубатуры трюмов, палубных TEU и Ro-Ro</li>
+                        <li>Подписание ЭТрН / коносаментов УКЭП (КриптоПро)</li>
+                        <li>Бесшовная выгрузка первички в 1С:ERP</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================================
-         COMPLIANCE SECTION
-         ============================================================ -->
-    <section id="compliance" class="section compliance" aria-labelledby="compliance-title">
+    <section id="rms-deep" class="section rms-deep">
         <div class="container">
-            <header class="section-header reveal">
-                <span class="tag">Регуляторное соответствие</span>
-                <h2 id="compliance-title" class="section-title">Полное соответствие законодательству РФ «из коробки»</h2>
-                <p class="section-subtitle">Никаких доработок «под закон». Модули валидации и интеграции встроены в ядро платформы и обновляются синхронно с изменениями нормативной базы.</p>
-            </header>
-            <div class="compliance__grid" role="list">
-                <article class="compliance-card reveal" role="listitem">
-                    <div class="compliance-card__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
-                    <h3 class="compliance-card__title">АЦБПДП Минтранса РФ</h3>
-                    <p class="compliance-card__desc">Автоматическая передача данных о пассажирах (ПД) в АЦБПДП по протоколу Минтранса (XML через СМЭВ/ТЛС). Поддержка всех типов сообщений: списки посадки, изменения, аннулирование. Очередь доставки с гарантией exactly-once.</p>
-                    <div class="compliance-card__tags">
-                        <span class="compliance-tag">ФЗ-219 / Постановление 1498</span>
-                        <span class="compliance-tag">СМЭВ 3.x</span>
-                        <span class="compliance-tag">TLS 1.3 / ГОСТ TLS</span>
+            <div class="section-header left">
+                <span class="tag">Математика RMS / CRS</span>
+                <h2 class="section-title">Алгоритмическое преимущество платформы</h2>
+                <p class="section-subtitle">Каждый параметр овербукинга и триггер открытия класса рассчитывается по статистическим моделям на исторических данных.</p>
+            </div>
+            <div class="rms-deep__grid">
+                <div>
+                    <div class="theory-card">
+                        <h3 class="theory-card__title">Serial & Parallel Nesting</h3>
+                        <p style="color:var(--text-medium); font-size:0.9375rem; margin-bottom:1rem;">Иерархия классов Y → B → M → H → Q → V. Продажа в высоком классе уменьшает доступность в низких, защищая маржинальность в пиковые даты.</p>
+                        <div class="formula-box">BidPrice_k = E[Rev | Accept_k] - E[Rev | Reject_k]
+Открытие класса k ⇔ Fare_k ≥ BidPrice_k(t, x)</div>
                     </div>
-                </article>
-                <article class="compliance-card reveal reveal-delay-1" role="listitem">
-                    <div class="compliance-card__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
-                    <h3 class="compliance-card__title">ГИС ЭПД (Электронные перевозочные документы)</h3>
-                    <p class="compliance-card__desc">Интеграция грузового контура с ГИС ЭПД через аккредитованных операторов ИС ЭПД (СБИС, Диадок, Контур, Такском). Формирование ЭТрН по приказам ФНС/Минтранса, подписание УКЭП, контроль статусов жизненного цикла документа.</p>
-                    <div class="compliance-card__tags">
-                        <span class="compliance-tag">ФЗ-402 / Приказ МТ 181</span>
-                        <span class="compliance-tag">XML Schema v5.01+</span>
-                        <span class="compliance-tag">УКЭП (КриптоПро / VipNet)</span>
+                    <div class="theory-card">
+                        <h3 class="theory-card__title">Управляемый овербукинг</h3>
+                        <p style="color:var(--text-medium); font-size:0.9375rem; margin-bottom:1rem;">Моделирование вероятности No-Show по Биномиальному закону. Оптимальный лимит сверхпродаж минимизирует риски bumping и spoilage.</p>
+                        <div class="formula-box">L* = argmax_L Σ [P(NS = k) * (Rev_L - Penalty_k)]
+P(NS=k) ~ Binomial(n=Booked, p=NoShowRate)</div>
                     </div>
-                </article>
-                <article class="compliance-card reveal reveal-delay-2" role="listitem">
-                    <div class="compliance-card__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8"></path><path d="M12 17v4"></path></svg></div>
-                    <h3 class="compliance-card__title">54-ФЗ (Онлайн-кассы) &amp; 152-ФЗ (Персональные данные)</h3>
-                    <p class="compliance-card__desc">Облачная фискализация чеков (ФФД 1.2) при любой оплате (карта, СБП, квитанция). Шифрование ПДн по ГОСТ (Магма/Кузнечик), разделение ролей доступа, журналы аудита (СОКУР/ФСТЭК при необходимости).</p>
-                    <div class="compliance-card__tags">
-                        <span class="compliance-tag">ФФД 1.2 / ФН 15/36 мес</span>
-                        <span class="compliance-tag">ГОСТ Р 34.12-2015</span>
-                        <span class="compliance-tag">Роль: Оператор ПДн</span>
+                </div>
+                <div class="calculator">
+                    <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:0.5rem;">Калькулятор экономического эффекта</h3>
+                    <p style="font-size:0.875rem; color:var(--text-muted); margin-bottom:1.5rem;">Оценка эффекта от внедрения Nesting, Overbooking и ЭТрН</p>
+                    <div class="calc__input-group">
+                        <div class="calc__label-row"><span>Флот в линии (судов)</span><span class="calc__value" id="val-fleet">5</span></div>
+                        <input type="range" class="calc__slider" id="inp-fleet" min="1" max="50" value="5">
                     </div>
-                </article>
-                <article class="compliance-card reveal reveal-delay-3" role="listitem">
-                    <div class="compliance-card__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></div>
-                    <h3 class="compliance-card__title">ЕСПБ, ВПД, Карты жителя, Субсидии</h3>
-                    <p class="compliance-card__desc">Автоматическая верификация прав на льготную перевозку через ЕСПБ и региональные реестры. Формирование отчетности для получения субсидий из бюджетов (фederal/regional) в установленных форматах Минтранса/Минэкономразвития.</p>
-                    <div class="compliance-card__tags">
-                        <span class="compliance-tag">Постановление 781 / 1033</span>
-                        <span class="compliance-tag">API ЕСПБ / Рег. реестры</span>
-                        <span class="compliance-tag">Авто-отчетность (Excel/XML)</span>
+                    <div class="calc__input-group">
+                        <div class="calc__label-row"><span>Пассажиропоток в год (тыс. чел.)</span><span class="calc__value" id="val-pax">150</span></div>
+                        <input type="range" class="calc__slider" id="inp-pax" min="50" max="1000" value="150" step="10">
                     </div>
-                </article>
-                <article class="compliance-card reveal reveal-delay-4" role="listitem">
-                    <div class="compliance-card__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div>
-                    <h3 class="compliance-card__title">Реестр отечественного ПО (Приказ Минцифры №2570)</h3>
-                    <p class="compliance-card__desc">Полный стек технологий на отечественном ПО: ОС (Астра Линукс / РЕД ОС), СУБД (PostgreSQL Pro / Яндекс.Облако БД), Контейнеры (Deckhouse / K8s), Криптография (КриптоПро CSP / VipNet). Исключение вендорной блокировки.</p>
-                    <div class="compliance-card__tags">
-                        <span class="compliance-tag">Запись в Реестре №... (в процессе/получена)</span>
-                        <span class="compliance-tag">Астра Линукс Special Edition</span>
-                        <span class="compliance-tag">PostgreSQL Pro Enterprise</span>
+                    <div class="calc__input-group">
+                        <div class="calc__label-row"><span>Средний билет (руб.)</span><span class="calc__value" id="val-ticket">2500</span></div>
+                        <input type="range" class="calc__slider" id="inp-ticket" min="500" max="10000" value="2500" step="100">
                     </div>
-                </article>
-                <article class="compliance-card reveal reveal-delay-4" role="listitem">
-                    <div class="compliance-card__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="6" x2="12" y2="18"></line><line x1="6" y1="12" x2="18" y2="12"></line></svg></div>
-                    <h3 class="compliance-card__title">Информационная безопасность (ФСТЭК / ФСБ)</h3>
-                    <p class="compliance-card__desc">Готовность к аттестации ГИС по классам защищенности (КЗ 1-3). Встроенные средства: МЭ (КриптоПро IPsec), СКЗИ, контроль целостности, разграничение доступа (RBAC/ABAC), SIEM-коннекторы (Positive Technologies, Solar Dozor).</p>
-                    <div class="compliance-card__tags">
-                        <span class="compliance-tag">Приказ ФСТЭК №21 / №17</span>
-                        <span class="compliance-tag">КЗ 1, 2, 3</span>
-                        <span class="compliance-tag">SIEM / SOC Integration</span>
+                    <div class="calc__results">
+                        <div class="calc__result-item">
+                            <div class="calc__result-label">Прирост RMS / Нестинг</div>
+                            <div class="calc__result-value" id="res-pax" style="color:var(--accent-amber);">+13.5 М ₽</div>
+                        </div>
+                        <div class="calc__result-item">
+                            <div class="calc__result-label">Сокращение No-Show</div>
+                            <div class="calc__result-value" id="res-noshow">+6.2 М ₽</div>
+                        </div>
+                        <div class="calc__result-item calc__total">
+                            <div class="calc__result-label">Совокупный годовой эффект</div>
+                            <div class="calc__result-value" id="res-total">+19.7 М ₽</div>
+                        </div>
                     </div>
-                </article>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================================
-         DEPLOYMENT MODELS
-         ============================================================ -->
-    <section id="deployment" class="section deployment" aria-labelledby="deploy-title">
+    <section id="deployment" class="section deployment">
         <div class="container">
-            <header class="section-header reveal">
+            <div class="section-header">
                 <span class="tag">Модели внедрения</span>
-                <h2 id="deploy-title" class="section-title">Гибкие модели развертывания: от чистого SaaS до полного On-Premise</h2>
-                <p class="section-subtitle">Выбирайте уровень контроля над данными и инфраструктурой. Архитектура контейнерная (Kubernetes), переносимая между любыми совместимыми контурами.</p>
-            </header>
+                <h2 class="section-title">Гибкие варианты развертывания</h2>
+                <p class="section-subtitle">Контейнерная архитектура позволяет развернуть систему как в облаке СВТР, так и на полностью закрытом периметре заказчика.</p>
+            </div>
             <div class="deploy__grid">
-                <!-- SaaS Card -->
-                <article class="deploy-card reveal" style="--accent-color: #0066ff; --icon-bg: rgba(0,102,255,0.1); --badge-bg: rgba(0,102,255,0.15); --badge-color: #00d2ff; --badge-border: rgba(0,210,255,0.3);">
-                    <div class="deploy-card__header">
-                        <div>
-                            <h3 class="deploy-card__title">SaaS / Hosted CRS на серверах СВТР</h3>
-                            <p class="deploy-card__subtitle">Размещение в отказоустойчивом ЦОД Tier III (Москва/СПб) с георепликацией</p>
-                        </div>
-                        <div class="deploy-card__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8"></path><path d="M12 17v4"></path><line x1="6" y1="17" x2="6.01" y2="17"></line><line x1="18" y1="17" x2="18.01" y2="17"></line></svg></div>
-                        <span class="deploy-card__badge">Рекомендуется для 80% пароходств</span>
-                    </div>
-                    <ul class="deploy-card__list">
-                        <li class="deploy-item"><svg class="deploy-item__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><div class="deploy-item__text"><strong>Zero CapEx на железо.</strong> Оплата по модели «за транзакцию» или фиксированная месячная лицензия за слот судна.</div></li>
-                        <li class="deploy-item"><svg class="deploy-item__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><div class="deploy-item__text"><strong>SLA 99.98% (финансовые штрафы).</strong> Активный-активный кластер в 2 ДЦ. RPO=0, RTO&lt;30 сек. DDoS-защита L3-L7 входит в стоимость.</div></li>
-                        <li class="deploy-item"><svg class="deploy-item__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><div class="deploy-item__text"><strong>Автообновления.</strong> Новые фичи RMS, патчи безопасности, изменения регуляторики — без участия ИТ-штата заказчика (Blue/Green деплой).</div></li>
-                        <li class="deploy-item"><svg class="deploy-item__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><div class="deploy-item__text"><strong>Бэкапы и PITR.</strong> Point-in-Time Recovery до любой секунды за 30 дней. Тестирование восстановления еженедельно.</div></li>
-                        <li class="deploy-item"><svg class="deploy-item__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><div class="deploy-item__text"><strong>Интеграция с Госсистемами «под ключ».</strong> Мы сами поддерживаем актуальность шлюзов к АЦБПДП, ГИС ЭПД, ОФД.</div></li>
-                    </ul>
-                    <div class="deploy-card__footer">
-                        <button class="btn btn--primary deploy-card__btn" data-target="lead" data-packages="pax,cargo,arch">Выбрать этот вариант в заявке</button>
-                    </div>
-                </article>
-
-                <!-- On-Premise Card -->
-                <article class="deploy-card reveal reveal-delay-1" style="--accent-color: #00d2ff; --icon-bg: rgba(0,210,255,0.1); --badge-bg: rgba(0,210,255,0.15); --badge-color: #00d2ff; --badge-border: rgba(0,210,255,0.3);">
-                    <div class="deploy-card__header">
-                        <div>
-                            <h3 class="deploy-card__title">On-Premise / Hybrid (В контуре заказчика)</h3>
-                            <p class="deploy-card__subtitle">Развертывание на инфраструктуре пароходства (Кубернетис / VM) с опциональной репликацией в СВТР</p>
-                        </div>
-                        <div class="deploy-card__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div>
-                        <span class="deploy-card__badge">Для критических требований к суверенитету данных</span>
-                    </div>
-                    <ul class="deploy-card__list">
-                        <li class="deploy-item"><svg class="deploy-item__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><div class="deploy-item__text"><strong>Полный контроль данных.</strong> База данных и шифрованные бэкапы никогда не покидают периметр заказчика. Соответствие 152-ФЗ (КЗ-1/2) и криптографическим требованиям ФСБ.</div></li>
-                        <li class="deploy-item"><svg class="deploy-item__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><div class="deploy-item__text"><strong>Работа в изолированном контуре.</strong> Синхронизация с госсистемами (АЦБПДП, ГИС ЭПД) через защищенные шлюзы заказчика (СМЭВ-шлюз, КriptоПРО IPsec).</div></li>
-                        <li class="deploy-item"><svg class="deploy-item__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><div class="deploy-item__text"><strong>Helm-charts / Operator для K8s.</strong> Установка одной командой. Автоматические миграции БД (Flyway/Liquibase). Мониторинг через Prometheus/Grafana (экспортеры встроены).</div></li>
-                        <li class="deploy-item"><svg class="deploy-item__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><div class="deploy-item__text"><strong>Hybrid DR (Disaster Recovery).</strong> Опционально: асинхронная репликация CRS в облако СВТР для горячего резерва (Active-Passive) при потере ДЦ заказчика.</div></li>
-                        <li class="deploy-item"><svg class="deploy-item__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><div class="deploy-item__text"><strong>Модель лицензирования.</strong> Перпетуальная лицензия + ежегодная техническая поддержка (20% от стоимости) или подписка на кластер (включает обновления).</div></li>
-                    </ul>
-                    <div class="deploy-card__footer">
-                        <button class="btn btn--secondary deploy-card__btn" data-target="lead" data-packages="pax,cargo,arch">Выбрать этот вариант в заявке</button>
-                    </div>
-                </article>
+                <div class="deploy-card">
+                    <h3 style="font-size:1.5rem; font-weight:700; margin-bottom:0.5rem;">SaaS / Hosted CRS (Облако СВТР)</h3>
+                    <p style="color:var(--text-medium); margin-bottom:1.5rem;">ЦОД Tier III (Москва/СПб), георепликация, SLA 99.98% с финансовой ответственностью.</p>
+                    <div class="deploy-item"><strong>Zero CapEx:</strong> Оплата за объем транзакций или ежемесячную подписку на судно.</div>
+                    <div class="deploy-item"><strong>Автообновления:</strong> Регуляторные изменения и новые фичи RMS без участия штата заказчика.</div>
+                    <div class="deploy-item"><strong>Шлюзы «под ключ»:</strong> Встроенные интеграции с АЦБПДП, ГИС ЭПД и фискализацией 54-ФЗ.</div>
+                    <a href="#lead" class="btn btn--primary" style="margin-top:1.5rem;">Выбрать SaaS</a>
+                </div>
+                <div class="deploy-card">
+                    <h3 style="font-size:1.5rem; font-weight:700; margin-bottom:0.5rem;">On-Premise (Контур заказчика)</h3>
+                    <p style="color:var(--text-medium); margin-bottom:1.5rem;">Развертывание на Kubernetes / VM в закрытой корпоративной инфраструктуре пароходства.</p>
+                    <div class="deploy-item"><strong>Полный суверенитет:</strong> База данных и ключи ЭЦП не покидают периметр безопасности заказчика.</div>
+                    <div class="deploy-item"><strong>Helm Charts / Operator:</strong> Стандартизированный деплой и встроенный мониторинг Prometheus/Grafana.</div>
+                    <div class="deploy-item"><strong>Реестр ПО РФ:</strong> Совместимость с Astra Linux, РЕД ОС и СУБД Postgres Pro.</div>
+                    <a href="#lead" class="btn btn--secondary" style="margin-top:1.5rem; color:var(--text-dark); border-color:var(--border-light);">Выбрать On-Premise</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================================
-         FAQ SECTION
-         ============================================================ -->
-    <section id="faq" class="section faq" aria-labelledby="faq-title">
-        <div class="container">
-            <header class="section-header reveal">
-                <span class="tag">Частые вопросы CTO / Коммерческого директора</span>
-                <h2 id="faq-title" class="section-title">Ответы на архитектурные и бизнес-вопросы до начала пилотного проекта</h2>
-            </header>
-            <div class="faq__list" role="list">
-                <details class="faq__item reveal" role="listitem">
-                    <summary class="faq__question" aria-expanded="false">
-                        <span>Мы уже имеем кассы, турникеты и валидаторы на причалах. Как происходит интеграция без замены «железа»?</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </summary>
-                    <div class="faq__answer">
-                        <div class="faq__answer-inner">
-                            <p>СВТР <strong>не поставляет оборудование</strong>. Наш API-шлюз интегрируется с любой текущей инфраструктурой через стандартные протоколы:</p>
-                            <ul style="margin: 1rem 0 0 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.5rem; font-size: 0.875rem; color: var(--text-medium);">
-                                <li><code>Кассы (АТОЛ, Штрих-М, Эвотор и др.)</code> — протокол ФФД 1.2, драйверы ККТ. Билет = фискальный чек + PDF/E-билет в приложении.</li>
-                                <li><code>Турникеты / Входные группы</code> — интеграция через контроллеры доступа (ZKTeco, IronLogic, Perco) по Wiegand/OSDP/HTTP API. Валидация QR/штрих-кода/НФК билета за &lt;200мс.</li>
-                                <li><code>Портативные терминалы контролеров</code> — наш PWA-офлайн-модуль на Android/iOS (IndexedDB) для проверки посадки без связи. Синхронизация при появлении сети.</li>
-                                <li><code>Существующие сайты/приложения</code> — виджет бронирования (iframe/React-компонент) или Headless API для вашего фронтенда.</li>
-                            </ul>
-                            <p style="margin-top: 1rem;">Мы предоставляем <strong>SDK и Postman-коллекции</strong> для ваших интеграторов. Типовое подключение кассы/турникета — 1-2 человеко-дня.</p>
-                        </div>
-                    </div>
-                </details>
-                <details class="faq__item reveal reveal-delay-1" role="listitem">
-                    <summary class="faq__question" aria-expanded="false">
-                        <span>Насколько надежен ваш ЦОД? Что если отключат интернет в регионе пароходства?</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </summary>
-                    <div class="faq__answer">
-                        <div class="faq__answer-inner">
-                            <p><strong>ЦОД Tier III (Тиер 3):</strong> Два независимых канала питания, N+1 по охлаждению, два вышестоящих провайдера (Ростелеком + МГТС/РТКомм), защита DDoS L3-L7 (Qrator/StormWall). SLA 99.98% — это <strong>&lt;105 мин простоя в год</strong>, финансово обеспеченные штрафы.</p>
-                            <p><strong>Профиль интернета в регионе:</strong> Архитектура <strong>Offline-First</strong> решает эту проблему радикально:</p>
-                            <ol style="margin: 1rem 0 0 1.5rem; color: var(--text-medium); line-height: 1.8;">
-                                <li>Кассовый терминал/Планшет контролера кэширует актуальный инвентарь и списки посадки (PWA + Service Workers).</li>
-                                <li>Продажа/Посадка происходят локально. Транзакции пишутся в локальную SQLite/IndexedDB.</li>
-                                <li>При появлении связи — автоматическая синхронизация (Conflict-free Replicated Data Types — CRDTs для счетчиков мест).</li>
-                                <li>Гарантия: <strong>двойные продажи невозможны</strong> даже при длительном офлайне за счет предварительного резервирования квот на терминал (Quota Allocation).</li>
-                            </ol>
-                        </div>
-                    </div>
-                </details>
-                <details class="faq__item reveal reveal-delay-2" role="listitem">
-                    <summary class="faq__question" aria-expanded="false">
-                        <span>Как выглядит поэтапное внедрение? Можно ли начать с одного направления/судна?</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </summary>
-                    <div class="faq__answer">
-                        <div class="faq__answer-inner">
-                            <p>Да, именно так мы и рекомендуем начать (MVP подход). Типичный план:</p>
-                            <ol style="margin: 1rem 0 0 1.5rem; color: var(--text-medium); line-height: 2;">
-                                <li><strong>Этап 1 (Пилот, 4-6 недель):</strong> 1-2 судна, 1 маршрут. Только E-Ticketing (веб + касса) + АЦБПДП. CRM/РМС отключены. Цель: проверить интеграцию с «железом» и госсистемами.</li>
-                                <li><strong>Этап 2 (Масштабирование CRS, 2-3 месяца):</strong> Подключение всего флота к Hosted CRS. Включение по-сегментной продажи. Настройка агентских квот для ключевых туроператоров.</li>
-                                <li><strong>Этап 3 (RMS, 1-2 месяца):</strong> Настройка классов бронирования (RBD), калибровка No-Show моделей на накопленной статистике. Включение Nesting и Overbooking.</li>
-                                <li><strong>Этап 4 (Грузовой контур, параллельно):</strong> Внедрение Cargo модуля, ЭТрН, интеграция с 1С и ГИС ЭПД.</li>
-                            </ol>
-                            <p style="margin-top: 1rem;">Каждый этап дает измеримый бизнес-эффект. Оплачиваете только включенные модули.</p>
-                        </div>
-                    </div>
-                </details>
-                <details class="faq__item reveal reveal-delay-3" role="listitem">
-                    <summary class="faq__question" aria-expanded="false">
-                        <span>Как обеспечивается работа на грузопассажирских паромах (Ro-Pax) где единый инвентарь: и пассажиры, и фура/авто?</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </summary>
-                    <div class="faq__answer">
-                        <div class="faq__answer-inner">
-                            <p>Это ключевой кейс для нашей архитектуры. Единый CRS управляет <strong>гетерогенным инвентарем</strong> через абстракцию «Ресурс»:</p>
-                            <ul style="margin: 1rem 0 0 1.5rem; color: var(--text-medium); line-height: 1.8;">
-                                <li><strong>Пассажирский ресурс:</strong> Места в салонах/каютах (классы RBD, нестинг).</li>
-                                <li><strong>Грузовой ресурс:</strong> Погонные метры на палубе (длина x ширина), контейнерные слоты (TEU), площадь трюма (м²), дедвейт (т).</li>
-                            </ul>
-                            <p>При бронировании фуры (Ro-Ro) система списывает погонные метры из палубного пула. При бронировании пассажира — место из салонного пула. <strong>Пересечений нет</strong>, но есть <strong>общие ограничения судна</strong> (дедвейт, осадка,.trim). RMS учитывает маржинальность: 1 фура = X руб., 1 пасс = Y руб. Оптимизатор распределяет палубную площадь под максимальную выручку рейса.</p>
-                        </div>
-                    </div>
-                </details>
-                <details class="faq__item reveal reveal-delay-4" role="listitem">
-                    <summary class="faq__question" aria-expanded="false">
-                        <span>Что входит в стоимость сопровождения (SLA поддержки)? Есть ли SLA по времени ответа на инциденты?</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </summary>
-                    <div class="faq__answer">
-                        <div class="faq__answer-inner">
-                            <p>Стандартный пакет сопровождения (входит в SaaS / 20% от лицензии On-Prem):</p>
-                            <table style="width:100%; border-collapse:collapse; margin-top:1rem; font-size:0.875rem; font-family:var(--font-sans);">
-                                <thead><tr style="border-bottom:1px solid var(--border-light); text-align:left;"><th style="padding:.5rem; color:var(--text-muted);">Уровень</th><th style="padding:.5rem; color:var(--text-muted);">Время реакции</th><th style="padding:.5rem; color:var(--text-muted);">Канал</th><th style="padding:.5rem; color:var(--text-muted);">Покрытие</th></tr></thead>
-                                <tbody>
-                                    <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:.5rem; font-family:var(--font-mono); font-weight:600;">Critical (P1)</td><td style="padding:.5rem;">15 мин</td><td style="padding:.5rem;">Телефон 24/7 + Telegram-чат дежурных</td><td style="padding:.5rem;">Недоступность CRS/Оплаты</td></tr>
-                                    <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:.5rem; font-family:var(--font-mono); font-weight:600;">High (P2)</td><td style="padding:.5rem;">1 час</td><td style="padding:.5rem;">Telegram / Email</td><td style="padding:.5rem;">Ошибки расчетов, сбои интеграций Госсистем</td></tr>
-                                    <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:.5rem; font-family:var(--font-mono); font-weight:600;">Medium (P3)</td><td style="padding:.5rem;">4 часа (раб. время)</td><td style="padding:.5rem;">Портал поддержки (Jira/YouTrack)</td><td style="padding:.5rem;">Баги UI, запросы отчетов, консультации</td></tr>
-                                    <tr><td style="padding:.5rem; font-family:var(--font-mono); font-weight:600;">Low (P4)</td><td style="padding:.5rem;">Следующий релиз</td><td style="padding:.5rem;">Портал поддержки</td><td style="padding:.5rem;">Фич-реквесты, доработки конфигурации</td></tr>
-                                </tbody>
-                            </table>
-                            <p style="margin-top:1rem;">Для On-Premise: мы даем патчи безопасности в течение 24ч после CVE (Critical). Плановые релизы — раз в 2 недели (Rolling updates via Helm).</p>
-                        </div>
-                    </div>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-         LEAD FORM / DOWNLOAD SECTION
-         ============================================================ -->
-    <section id="lead" class="section lead" aria-labelledby="lead-title">
+    <section id="lead" class="section lead">
         <div class="container">
             <div class="lead__grid">
-                <div class="lead__info reveal">
-                    <span class="tag" style="background: rgba(245,158,11,0.15); color: var(--accent-amber); border-color: rgba(245,158,11,0.2);">Главное целевое действие</span>
-                    <h2 id="lead-title" class="section-title" style="color: var(--text-primary);">Получите полные технические меморандумы и коммерческие презентации</h2>
-                    <p class="lead__desc">Три документа, покрывающих все вопросы принятия решения: функциональная архитектура, математика RMS, схема интеграции с госсистемами, модели лицензирования и стоимости владения (TCO).</p>
-                    <fieldset class="lead__packages" aria-label="Выбор пакетов презентаций для скачивания">
-                        <legend style="font-weight:600; margin-bottom:1rem; color:var(--text-secondary); font-size:0.875rem;">Выберите пакеты документов:</legend>
-                        <label class="package-card" style="--pkg-color: #0066ff;">
-                            <input type="checkbox" name="packages" value="pax" checked>
-                            <div class="package-card__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
-                            <div class="package-card__content">
-                                <div class="package-card__name">Пассажирский контур: E-Ticketing, Hosted CRS, RMS</div>
-                                <div class="package-card__desc">Архитектура, API, Nesting, Overbooking, АЦБПДП, ЕСПБ, офлайн-синхронизация. 24 стр.</div>
-                            </div>
-                            <div class="package-card__check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-                        </label>
-                        <label class="package-card" style="--pkg-color: #10b981;">
-                            <input type="checkbox" name="packages" value="cargo" checked>
-                            <div class="package-card__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg></div>
-                            <div class="package-card__content">
-                                <div class="package-card__name">Грузовой контур: Cargo Booking, ЭТрН, ГИС ЭПД</div>
-                                <div class="package-card__desc">Планирование трюмов/палуб, 3D Bin Packing, XML схема ЭТрН, УКЭП, интеграция 1С/Операторы ЭПД. 18 стр.</div>
-                            </div>
-                            <div class="package-card__check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-                        </label>
-                        <label class="package-card" style="--pkg-color: #00d2ff;">
-                            <input type="checkbox" name="packages" value="arch" checked>
-                            <div class="package-card__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8"></path><path d="M12 17v4"></path><line x1="6" y1="17" x2="6.01" y2="17"></line><line x1="18" y1="17" x2="18.01" y2="17"></line></svg></div>
-                            <div class="package-card__content">
-                                <div class="package-card__name">Архитектура, ИБ, Развертывание (SaaS / On-Prem), TCO</div>
-                                <div class="package-card__desc">Схема кластеров, КЗ 1-3, Реестр ПО РФ, миграция данных, SLA, модели ценообразования. 16 стр.</div>
-                            </div>
-                            <div class="package-card__check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-                        </label>
-                    </fieldset>
-                </div>
-                <form class="lead__form reveal reveal-delay-1" id="leadForm" novalidate>
-                    <h3 style="font-size:1.25rem; font-weight:600; margin-bottom:0.5rem; color:var(--text-primary);">Заявка на доступ к материалам</h3>
-                    <p style="color:var(--text-secondary); margin-bottom:1.5rem; font-size:0.9375rem;">Заполните форму — ссылки на скачивание PDF придут на корпоративную почту мгновенно. Менеджер свяжется в течение 15 минут для согласования демо-доступа.</p>
-                    <div class="form__row form__row--half">
-                        <div class="form__group">
-                            <label for="fio">ФИО и Должность <span aria-hidden="true">*</span></label>
-                            <input type="text" id="fio" name="fio" placeholder="Иванов Иван Иванович, Коммерческий директор" required autocomplete="name">
-                        </div>
-                        <div class="form__group">
-                            <label for="company">Название пароходства / организации <span aria-hidden="true">*</span></label>
-                            <input type="text" id="company" name="company" placeholder="АО «Северное пароходство»" required autocomplete="organization">
-                        </div>
+                <div>
+                    <span class="tag" style="background:rgba(245,158,11,0.15);color:var(--accent-amber);border-color:rgba(245,158,11,0.3)">Материалы и документация</span>
+                    <h2 class="section-title">Получите технические меморандумы платформы СВТР</h2>
+                    <p style="color:var(--text-secondary); margin-bottom:2rem; line-height:1.7;">Комплект материалов для CTO и коммерческого директора: детальная архитектура API, математические формулы RMS, схемы стыковки с АЦБПДП/ГИС ЭПД и расчет TCO.</p>
+                    <div style="background:var(--bg-card-dark); border:1px solid var(--border-dark); border-radius:var(--radius-md); padding:1.25rem; margin-bottom:1rem;">
+                        <strong style="color:var(--text-primary); display:block; margin-bottom:0.25rem;">Пассажирский контур (E-Ticketing, Hosted CRS, RMS)</strong>
+                        <span style="font-size:0.8125rem; color:var(--text-muted); font-family:var(--font-mono);">Архитектура, REST API, Nesting, Overbooking, АЦБПДП — 24 стр. PDF</span>
                     </div>
-                    <div class="form__row form__row--half">
-                        <div class="form__group">
-                            <label for="email">Корпоративный Email <span aria-hidden="true">*</span></label>
-                            <input type="email" id="email" name="email" placeholder="ivanov@sevparohod.ru" required autocomplete="email">
+                    <div style="background:var(--bg-card-dark); border:1px solid var(--border-dark); border-radius:var(--radius-md); padding:1.25rem;">
+                        <strong style="color:var(--text-primary); display:block; margin-bottom:0.25rem;">Грузовой контур и ЭТрН (Cargo & eGN)</strong>
+                        <span style="font-size:0.8125rem; color:var(--text-muted); font-family:var(--font-mono);">Учет палубных слотов Ro-Ro/TEU, ГИС ЭПД, XML-схемы, УКЭП — 18 стр. PDF</span>
+                    </div>
+                </div>
+                <form class="lead__form" id="leadForm" onsubmit="event.preventDefault(); alert('Спасибо! Заявка отправлена. Меморандумы направлены на ваш email.');">
+                    <h3 style="font-size:1.25rem; font-weight:600; margin-bottom:1.5rem; color:var(--text-primary);">Запросить материалы и демо-доступ</h3>
+                    <div class="form__row">
+                        <div>
+                            <label for="fio" style="color:var(--text-secondary)">ФИО и должность</label>
+                            <input type="text" id="fio" placeholder="Иванов Иван, Коммерческий директор" required>
                         </div>
-                        <div class="form__group">
-                            <label for="phone">Телефон для связи <span aria-hidden="true">*</span></label>
-                            <input type="tel" id="phone" name="phone" placeholder="+7 (XXX) XXX-XX-XX" required autocomplete="tel">
+                        <div>
+                            <label for="company" style="color:var(--text-secondary)">Пароходство / Компания</label>
+                            <input type="text" id="company" placeholder="АО «Северный флот»" required>
                         </div>
                     </div>
                     <div class="form__row">
-                        <div class="form__group">
-                            <label for="comment">Дополнительно (планируемые сроки, состав флота, текущие боли)</label>
-                            <textarea id="comment" name="comment" rows="3" placeholder="Например: флот 8 судов, нужно подключить 3 туроператора, проблема с двойными продажами на маршруте Архангельск-Норильск..."></textarea>
+                        <div>
+                            <label for="email" style="color:var(--text-secondary)">Корпоративный Email</label>
+                            <input type="email" id="email" placeholder="ivanov@fleet.ru" required>
+                        </div>
+                        <div>
+                            <label for="phone" style="color:var(--text-secondary)">Телефон</label>
+                            <input type="tel" id="phone" placeholder="+7 (999) 000-00-00" required>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn--primary form__submit">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                        Получить доступ к презентациям
-                    </button>
-                    <p class="form__consent">Нажимая кнопку, вы соглашаетесь с <a href="#privacy">политикой конфиденциальности</a> и даете согласие на обработку персональных данных (152-ФЗ) для целей B2B-коммуникации.</p>
-                    <div class="form__status" id="formStatus" role="alert" aria-live="polite">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                        <div class="form__status-title">Материалы готовы к скачиванию</div>
-                        <div class="form__status-text">На вашу почту отправлены ссылки на 3 PDF-документа. Менеджер СВТР свяжется с вами в течение 15 минут для согласования доступа к демо-стенду.</div>
+                    <div style="margin-bottom:1.5rem;">
+                        <label for="comment" style="color:var(--text-secondary)">Размер флота или ключевые задачи</label>
+                        <textarea id="comment" rows="3" placeholder="Состав судов, текущие сложности бронирования..."></textarea>
                     </div>
+                    <button type="submit" class="btn btn--primary" style="width:100%; padding:1rem;">Получить доступ к материалам</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- ============================================================
-         FOOTER
-         ============================================================ -->
-    <footer class="footer" role="contentinfo">
+    <footer class="footer">
         <div class="container">
             <div class="footer__grid">
-                <div class="footer__brand">
-                    <a href="#" class="footer__logo logo" aria-label="СВТР — Главная">
-                        <span class="logo__mark" aria-hidden="true">СВТР</span>
-                        <span class="logo__text">Современные высокотехнологические решения</span>
-                    </a>
-                    <p class="footer__tagline">Enterprise-программные комплексы для управления пассажирскими и грузовыми перевозками речного, морского и смешанного («река-море») флота. Только ПО. Только API. Только результат.</p>
-                    <div class="footer__social">
-                        <a href="#" class="footer__social-link" aria-label="Telegram канал СВТР"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15l-3-3-6 6-3-3-7 7"></path></svg></a>
-                        <a href="#" class="footer__social-link" aria-label="ВКонтакте СВТР"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"></path><path d="M14 7.5V14a4.5 4.5 0 0 1-4.5 4.5"></path><path d="M6 15.5A4.5 4.5 0 0 1 2.5 11V6"></path><path d="M18 11a2 2 0 0 1 2 2v3.5a2.5 2.5 0 0 1-1.36 2.25"></path></svg></a>
-                        <a href="#" class="footer__social-link" aria-label="GitHub СВТР (Public SDK)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                <div>
+                    <div class="logo" style="margin-bottom:1rem;">
+                        <span class="logo__mark">СВТР</span>
+                        <span>СВТР</span>
                     </div>
+                    <p style="font-size:0.875rem; line-height:1.6;">Enterprise-программные комплексы для управления пассажирскими и грузовыми перевозками речного и смешанного флота.</p>
                 </div>
-                <nav class="footer__col" aria-label="Продукты">
-                    <h4 class="footer__col-title">Продукты</h4>
-                    <ul class="footer__links">
-                        <li><a href="#products" class="footer__link">E-Ticketing &amp; CRS</a></li>
-                        <li><a href="#products" class="footer__link">Revenue Management (RMS)</a></li>
-                        <li><a href="#products" class="footer__link">Cargo Booking &amp; ЭТрН</a></li>
-                        <li><a href="#architecture" class="footer__link">Архитектура и API</a></li>
+                <div>
+                    <h4 style="font-family:var(--font-mono); font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); margin-bottom:1rem;">Продукты</h4>
+                    <ul style="font-size:0.875rem; display:flex; flex-direction:column; gap:0.5rem;">
+                        <li><a href="#products">E-Ticketing & CRS</a></li>
+                        <li><a href="#products">Revenue Management</a></li>
+                        <li><a href="#products">Cargo & ЭТрН</a></li>
                     </ul>
-                </nav>
-                <nav class="footer__col" aria-label="Компания">
-                    <h4 class="footer__col-title">Компания</h4>
-                    <ul class="footer__links">
-                        <li><a href="#deployment" class="footer__link">Модели внедрения</a></li>
-                        <li><a href="#compliance" class="footer__link">Регуляторика и ИБ</a></li>
-                        <li><a href="#faq" class="footer__link">FAQ / Документация</a></li>
-                        <li><a href="#lead" class="footer__link">Запросить демо-доступ</a></li>
+                </div>
+                <div>
+                    <h4 style="font-family:var(--font-mono); font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); margin-bottom:1rem;">Внедрение</h4>
+                    <ul style="font-size:0.875rem; display:flex; flex-direction:column; gap:0.5rem;">
+                        <li><a href="#deployment">SaaS Решение</a></li>
+                        <li><a href="#deployment">On-Premise контур</a></li>
+                        <li><a href="#rms-deep">Калькулятор ROI</a></li>
                     </ul>
-                </nav>
-                <nav class="footer__col" aria-label="Правовая информация">
-                    <h4 class="footer__col-title">Правовое</h4>
-                    <ul class="footer__links">
-                        <li><a href="#privacy" class="footer__link">Политика конфиденциальности (152-ФЗ)</a></li>
-                        <li><a href="#terms" class="footer__link">Договор-оферта / Условия SaaS</a></li>
-                        <li><a href="#compliance" class="footer__link">Соответствие Реестру ПО РФ</a></li>
-                        <li><a href="#api" class="footer__link">Документация API (OpenAPI 3.1)</a></li>
+                </div>
+                <div>
+                    <h4 style="font-family:var(--font-mono); font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); margin-bottom:1rem;">Контакты</h4>
+                    <ul style="font-size:0.875rem; display:flex; flex-direction:column; gap:0.5rem;">
+                        <li>info@svtr-tech.ru</li>
+                        <li>8 (800) 555-35-35</li>
+                        <li>Москва, Сколково</li>
                     </ul>
-                </nav>
+                </div>
             </div>
-            <div class="footer__bottom">
-                <p>&copy; 2024 ООО «Современные высокотехнологические решения» (СВТР). ИНН 77XXYYYYYY. Все права защищены.</p>
-                <div class="footer__legal">
-                    <a href="#privacy" class="footer__legal-link">Политика конфиденциальности</a>
-                    <a href="#terms" class="footer__legal-link">Условия использования</a>
-                    <a href="#api" class="footer__legal-link">API Docs</a>
-                </div>
+            <div style="border-top:1px solid var(--border-dark); margin-top:2rem; padding-top:1.5rem; text-align:center; font-size:0.8125rem; color:var(--text-muted);">
+                © 2024 ООО «Современные высокотехнологические решения» (СВТР). Все права защищены.
             </div>
         </div>
     </footer>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast" role="status" aria-live="polite">
-        <svg class="toast__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-        <div class="toast__text" id="toastText"></div>
-    </div>
-
-    <!-- ============================================================
-         JAVASCRIPT (Vanilla ES6+)
-         ============================================================ -->
     <script>
-        (function() {
-            'use strict';
+        const inpFleet = document.getElementById('inp-fleet');
+        const inpPax = document.getElementById('inp-pax');
+        const inpTicket = document.getElementById('inp-ticket');
+        const valFleet = document.getElementById('val-fleet');
+        const valPax = document.getElementById('val-pax');
+        const valTicket = document.getElementById('val-ticket');
+        const resPax = document.getElementById('res-pax');
+        const resNoShow = document.getElementById('res-noshow');
+        const resTotal = document.getElementById('res-total');
 
-            // ============================================================
-            // UTILITIES
-            // ============================================================
-            const $ = (sel, ctx = document) => ctx.querySelector(sel);
-            const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
-
-            const formatNumber = (num, decimals = 0) => {
-                return num.toLocaleString('ru-RU', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
-            };
-
-            const showToast = (message, type = 'success') => {
-                const toast = $('#toast');
-                const text = $('#toastText');
-                text.textContent = message;
-                toast.className = 'toast visible ' + (type === 'success' ? 'toast--success' : '');
-                setTimeout(() => toast.classList.remove('visible'), 5000);
-            };
-
-            // ============================================================
-            // HEADER SCROLL & MOBILE MENU
-            // ============================================================
-            const header = $('#header');
-            const mobileMenuBtn = $('#mobileMenuBtn');
-            const mobileMenu = $('#mobileMenu');
-            const navLinks = $$('.nav__link, .mobile-menu__link');
-
-            let lastScroll = 0;
-            window.addEventListener('scroll', () => {
-                const y = window.scrollY;
-                if (y > 50) header.classList.add('scrolled');
-                else header.classList.remove('scrolled');
-                lastScroll = y;
-            }, { passive: true });
-
-            mobileMenuBtn.addEventListener('click', () => {
-                const isOpen = mobileMenu.classList.toggle('open');
-                mobileMenuBtn.setAttribute('aria-expanded', isOpen);
-                mobileMenuBtn.querySelector('.icon-menu').style.display = isOpen ? 'none' : 'block';
-                mobileMenuBtn.querySelector('.icon-close').style.display = isOpen ? 'block' : 'none';
-                document.body.style.overflow = isOpen ? 'hidden' : '';
-            });
-
-            // Close mobile menu on link click
-            $$('.mobile-menu__link, .mobile-menu__cta a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.remove('open');
-                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                    mobileMenuBtn.querySelector('.icon-menu').style.display = 'block';
-                    mobileMenuBtn.querySelector('.icon-close').style.display = 'none';
-                    document.body.style.overflow = '';
-                });
-            });
-
-            // Active nav link on scroll
-            const sections = $$('section[id]');
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const id = entry.target.getAttribute('id');
-                        navLinks.forEach(link => {
-                            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
-                        });
-                    }
-                });
-            }, { rootMargin: '-20% 0px -60% 0px' });
-            sections.forEach(s => observer.observe(s));
-
-            // ============================================================
-            // HERO MOCKUP TABS
-            // ============================================================
-            const tabs = $$('.mockup__tab');
-            const panels = $$('.mockup__panel');
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const target = tab.dataset.tab;
-                    tabs.forEach(t => {
-                        t.classList.toggle('active', t === tab);
-                        t.setAttribute('aria-selected', t === tab);
-                    });
-                    panels.forEach(p => {
-                        const isActive = p.id === 'panel-' + target;
-                        p.classList.toggle('active', isActive);
-                        p.hidden = !isActive;
-                    });
-                });
-            });
-
-            // ============================================================
-            // ROI CALCULATOR
-            // ============================================================
-            const calcInputs = {
-                fleet: $('#inp-fleet'),
-                pax: $('#inp-pax'),
-                cargo: $('#inp-cargo'),
-                ticket: $('#inp-ticket'),
-                freight: $('#inp-freight')
-            };
-            const calcOutputs = {
-                pax: $('#res-pax'),
-                cargo: $('#res-cargo'),
-                noshow: $('#res-noshow'),
-                roi: $('#res-roi'),
-                total: $('#res-total')
-            };
-            const valueDisplays = {
-                fleet: $('#val-fleet'),
-                pax: $('#val-pax'),
-                cargo: $('#val-cargo'),
-                ticket: $('#val-ticket'),
-                freight: $('#val-freight')
-            };
-
-            function recalc() {
-                const f = +calcInputs.fleet.value;
-                const p = +calcInputs.pax.value * 1000; // thousands
-                const c = +calcInputs.cargo.value * 1000; // thousands tons
-                const t = +calcInputs.ticket.value;
-                const fr = +calcInputs.freight.value;
-
-                // Update displays
-                valueDisplays.fleet.textContent = f;
-                valueDisplays.pax.textContent = formatNumber(+calcInputs.pax.value) + ' тыс.';
-                valueDisplays.cargo.textContent = formatNumber(+calcInputs.cargo.value) + ' тыс. т';
-                valueDisplays.ticket.textContent = formatNumber(t) + ' ₽';
-                valueDisplays.freight.textContent = formatNumber(fr) + ' ₽/т';
-
-                // Formulas (Simplified B2B Model)
-                // Base Revenue
-                const basePaxRev = p * t;
-                const baseCargoRev = c * fr;
-
-                // 1. Nesting/Overbooking uplift: 3-7% of pax revenue depending on load factor complexity
-                // Assuming avg load factor 65%, nesting adds ~4%, overbooking ~2% -> total 6% uplift
-                const paxUplift = basePaxRev * 0.06;
-
-                // 2. Cargo doc flow savings: 15 min per doc * cost of hour * docs per year
-                // Docs per year ~ cargo tons / avg ton per doc (20t) = c/20000. Cost hour 2000 rub.
-                const cargoDocsSaved = (c / 20) * 0.25 * 2000; // ~ 25 rub per ton equivalent saving
-
-                // 3. No-show recovery: Overbooking sells empty seats. No-show rate 4%. Recovery 80% of no-shows.
-                const noShowRecovery = p * 0.04 * 0.8 * t;
-
-                // Total Annual Effect
-                const total = paxUplift + cargoDocsSaved + noShowRecovery;
-
-                // ROI: SaaS Cost ~ 500k per vessel/year + setup. Total Cost = f * 500k + 1M setup.
-                const saasCost = f * 500000 + 1000000;
-                const roi = saasCost > 0 ? (total / saasCost * 100) : 0;
-
-                calcOutputs.pax.textContent = '+' + formatNumber(Math.round(paxUplift / 1e6), 1) + ' М ₽';
-                calcOutputs.cargo.textContent = '+' + formatNumber(Math.round(cargoDocsSaved / 1e6), 1) + ' М ₽';
-                calcOutputs.noshow.textContent = '+' + formatNumber(Math.round(noShowRecovery / 1e6), 1) + ' М ₽';
-                calcOutputs.roi.textContent = Math.round(roi) + '%';
-                calcOutputs.total.textContent = '+' + formatNumber(Math.round(total / 1e6), 1) + ' М ₽';
-            }
-
-            Object.values(calcInputs).forEach(input => {
-                input.addEventListener('input', recalc);
-            });
-            recalc(); // Initial
-
-            // ============================================================
-            // FAQ ACCORDION (Native <details> polyfill for animation)
-            // ============================================================
-            $$('.faq__item').forEach(item => {
-                const summary = item.querySelector('.faq__question');
-                const answer = item.querySelector('.faq__answer');
-                const inner = item.querySelector('.faq__answer-inner');
-
-                // Initial state check
-                if (item.open) {
-                    item.classList.add('active');
-                    answer.style.maxHeight = inner.scrollHeight + 'px';
-                }
-
-                summary.addEventListener('click', (e) => {
-                    e.preventDefault(); // Prevent default toggle
-                    const isOpen = item.hasAttribute('open');
-                    
-                    // Close others (optional: allow multiple open? Prompt says "accordion", usually single. Let's allow multiple but animate)
-                    // Let's just toggle current.
-                    
-                    if (isOpen) {
-                        // Close
-                        answer.style.maxHeight = answer.scrollHeight + 'px'; // Set explicit height for transition
-                        requestAnimationFrame(() => {
-                            answer.style.maxHeight = '0px';
-                        });
-                        setTimeout(() => {
-                            item.removeAttribute('open');
-                            item.classList.remove('active');
-                        }, 400);
-                    } else {
-                        // Open
-                        item.setAttribute('open', '');
-                        item.classList.add('active');
-                        answer.style.maxHeight = '0px';
-                        requestAnimationFrame(() => {
-                            answer.style.maxHeight = inner.scrollHeight + 'px';
-                        });
-                        // Clean up max-height after transition
-                        setTimeout(() => {
-                            if(item.open) answer.style.maxHeight = 'none';
-                        }, 400);
-                    }
-                });
-            });
-
-            // ============================================================
-            // LEAD FORM & MOCK DOWNLOAD
-            // ============================================================
-            const leadForm = $('#leadForm');
-            const formStatus = $('#formStatus');
-            const deployBtns = $$('.deploy-card__btn[data-target="lead"]');
-
-            // Scroll to form from deployment cards
-            deployBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const packages = btn.dataset.packages.split(',');
-                    $$('#leadForm input[name="packages"]').forEach(cb => {
-                        cb.checked = packages.includes(cb.value);
-                    });
-                    $('#lead').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    $('#fio').focus();
-                });
-            });
-
-            // Mock PDF Generation & Download
-            function generateMockPDF(packageName) {
-                const content = `СВТР — Техническое меморандум: ${packageName.toUpperCase()}\n\n` +
-                    `Дата генерации: ${new Date().toLocaleString('ru-RU')}\n` +
-                    `Статус: Демонстрационная версия (Marketing Landing)\n\n` +
-                    `--------------------------------------------------\n` +
-                    `Данный файл является заглушкой для демонстрации работы лендинга.\n` +
-                    `В продакшене здесь будет полноценный PDF (24-30 стр.), сгенерированный\n` +
-                    `на бэкенде (Node.js/Puppeteer или Python/WeasyPrint) на основе\n` +
-                    `шаблонов с подстановкой актуальных параметров пароходства.\n\n` +
-                    `Содержимое полной версии включает:\n` +
-                    `- Функциональную архитектуру микросервисов\n` +
-                    `- Схемы БД (ER-диаграммы CRS, Cargo, RMS)\n` +
-                    `- OpenAPI 3.1 спецификации эндпоинтов\n` +
-                    `- Матрицу соответствия ФЗ / Приказов Минтранса / ФНС\n` +
-                    `- ТЗ на интеграцию с текущим оборудованием заказчика\n` +
-                    `- Калькулятор TCO (SaaS vs On-Prem) за 5 лет\n` +
-                    `- План поэтапного внедрения (Roadmap)\n\n` +
-                    `Конфиденциально. Для внутреннего использования заказчика.\n` +
-                    `ООО «Современные высокотехнологические решения»`;
-                
-                const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `SVTR_Memo_${packageName}_${new Date().toISOString().split('T')[0]}.txt`; // .txt for safety in browser
-                a.click();
-                URL.revokeObjectURL(url);
-            }
-
-            leadForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const submitBtn = leadForm.querySelector('.form__submit');
-                const originalHtml = submitBtn.innerHTML;
-                
-                // Basic Validation
-                const required = leadForm.querySelectorAll('[required]');
-                let valid = true;
-                required.forEach(inp => {
-                    if (!inp.value.trim()) {
-                        inp.style.borderColor = 'var(--accent-red)';
-                        valid = false;
-                    } else {
-                        inp.style.borderColor = '';
-                    }
-                });
-                if (!valid) {
-                    showToast('Заполните все обязательные поля', 'error');
-                    return;
-                }
-
-                // Loading state
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<svg class="spinner" style="animation:spin 1s linear infinite;width:20px;height:20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="30 60" stroke-linecap="round"/></svg> Отправка...';
-                
-                // Simulate network delay
-                await new Promise(r => setTimeout(r, 1200));
-
-                // Trigger downloads for checked packages
-                $$('#leadForm input[name="packages"]:checked').forEach(cb => {
-                    generateMockPDF(cb.value);
-                });
-
-                // Show Success UI
-                leadForm.querySelectorAll('input, textarea, button, fieldset').forEach(el => el.style.display = 'none');
-                formStatus.classList.add('visible');
-                showToast('Презентации готовы! Ссылки отправлены на почту.', 'success');
-
-                // Reset for demo purposes (optional, keep success state)
-                // setTimeout(() => { leadForm.reset(); ... }, 10000);
-            });
-
-            // Spinner CSS injection for form
-            const style = document.createElement('style');
-            style.textContent = `@keyframes spin { to { transform: rotate(360deg); } }`;
-            document.head.appendChild(style);
-
-            // ============================================================
-            // SCROLL REVEAL (IntersectionObserver)
-            // ============================================================
-            const revealObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        revealObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-            $$('.reveal').forEach(el => revealObserver.observe(el));
-
-            // ============================================================
-            // SMOOTH SCROLL FOR ANCHORS (Fallback for older browsers)
-            // ============================================================
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    const target = document.querySelector(targetId);
-                    if (target) {
-                        e.preventDefault();
-                        const headerOffset = header.offsetHeight;
-                        const elementPosition = target.getBoundingClientRect().top + window.scrollY;
-                        const offsetPosition = elementPosition - headerOffset;
-                        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-                    }
-                });
-            });
-
-        })();
+        function updateCalc() {
+            const f = +inpFleet.value;
+            const p = +inpPax.value * 1000;
+            const t = +inpTicket.value;
+            valFleet.textContent = f;
+            valPax.textContent = inpPax.value;
+            valTicket.textContent = t;
+            const rev = p * t;
+            const rmsUplift = rev * 0.06;
+            const noShow = p * 0.04 * 0.8 * t;
+            const total = rmsUplift + noShow;
+            resPax.textContent = '+' + (rmsUplift / 1e6).toFixed(1) + ' М ₽';
+            resNoShow.textContent = '+' + (noShow / 1e6).toFixed(1) + ' М ₽';
+            resTotal.textContent = '+' + (total / 1e6).toFixed(1) + ' М ₽';
+        }
+        [inpFleet, inpPax, inpTicket].forEach(el => el.addEventListener('input', updateCalc));
+        updateCalc();
     </script>
 </body>
 </html>
